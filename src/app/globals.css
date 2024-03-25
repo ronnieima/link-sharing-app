@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .text-heading-m {
+    @apply text-[32px] font-bold leading-[150%];
+  }
+  .text-heading-s {
+    @apply text-[16px] font-bold leading-[150%];
+  }
+
+  .text-body-m {
+    @apply text-[16px] font-normal leading-[150%];
+  }
+  .text-body-s {
+    @apply text-[12px] font-normal leading-[150%];
+  }
+}
