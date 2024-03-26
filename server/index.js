@@ -8,6 +8,7 @@ const app = express();
 app.use(cors());
 
 app.get("/", (req, res) => {
+  console.log("endpoint hit");
   res.json({ message: "Hello world" });
 });
 

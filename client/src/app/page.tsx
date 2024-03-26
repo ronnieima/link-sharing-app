@@ -1,4 +1,7 @@
-export default function Home() {
+import { getApi } from "./actions";
+
+export default async function Home() {
+  const message = await getApi();
   return (
     <main>
       <h1 className="text-heading-m ">Let’s get you started</h1>
@@ -13,6 +16,7 @@ export default function Home() {
         Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.
         Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.
       </p>
+      <p>{message}</p>
     </main>
   );
 }
