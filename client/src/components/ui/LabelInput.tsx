@@ -28,7 +28,7 @@ export default function LabelInput({ label, value, type, placeholder }: Props) {
       control={control}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="text-body-s ">{label}</FormLabel>
+          <FormLabel className="text-body-s">{label}</FormLabel>
           <FormControl className="peer">
             <div className="aria-invalid:border-red group relative ">
               <Input
