@@ -9,8 +9,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 
 const loginFormSchema = z.object({
-  email: z.string().email().trim().min(1),
-  password: z.string().min(1),
+  email: z.string({ required_error: "Can't be empty" }).email().trim().min(1),
+  password: z.string({ required_error: "Please check again" }).min(1),
 });
 
 type LoginFormSchemaType = z.infer<typeof loginFormSchema>;
@@ -28,7 +28,7 @@ export default function LoginForm() {
     <Form {...form}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mx-auto max-w-[476px] space-y-10 md:rounded-lg md:bg-white md:p-10 md:shadow-sm"
+        className="mx-auto space-y-10 md:w-[476px] md:rounded-lg md:bg-white md:p-10 md:shadow-sm"
       >
         <header className="space-y-2">
           <h1 className="text-heading-m">Login</h1>
@@ -56,7 +56,7 @@ export default function LoginForm() {
         <footer className="text-body-m flex w-full flex-col items-center justify-center md:flex-row md:gap-1">
           <p>Don&apos;t have an account?</p>
           <Link
-            className="text-purple hover:text-purpleHover  transition-colors"
+            className="text-purple transition-colors  hover:text-purpleHover"
             href={"/register"}
           >
             Create account

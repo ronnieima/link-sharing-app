@@ -21,19 +21,26 @@ type Props = {
 
 export default function LabelInput({ label, value, type, placeholder }: Props) {
   const { control } = useFormContext();
+
   return (
     <FormField
       name={value}
       control={control}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="text-body-s">{label}</FormLabel>
-          <FormControl>
-            <div className="relative">
-              <Input type={type} placeholder={placeholder} {...field} />
-              <FormMessage className="text-body-s absolute right-4 top-1/2 -translate-y-1/2 font-thin text-red" />
+          <FormLabel className="text-body-s ">{label}</FormLabel>
+          <FormControl className="peer">
+            <div className="aria-invalid:border-red group relative ">
+              <Input
+                type={type}
+                placeholder={placeholder}
+                className="group-aria-invalid:border group-aria-invalid:border-red"
+                {...field}
+              />
+              <FormMessage className="text-body-s absolute right-4 top-1/2 hidden -translate-y-1/2 font-thin text-red md:block" />
             </div>
           </FormControl>
+          <FormMessage className="peer-aria-invalid:text-red md:hidden" />
         </FormItem>
       )}
     />

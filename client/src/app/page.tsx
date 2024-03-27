@@ -1,7 +1,8 @@
 import { getApi } from "./actions";
 
 export default async function Home() {
-  const message = await getApi();
+  const res = await getApi();
+  const message = res?.message;
   return (
     <main>
       <h1 className="text-heading-m ">Let’s get you started</h1>

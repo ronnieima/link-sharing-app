@@ -29,6 +29,9 @@ const config = {
       red: "#FF3939",
     },
     extend: {
+      aria: {
+        invalid: 'invalid="true"',
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
