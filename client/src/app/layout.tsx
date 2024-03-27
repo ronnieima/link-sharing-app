@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Sans } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 const instrumentSans = Instrument_Sans({ subsets: ["latin"] });
 
@@ -15,8 +16,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={instrumentSans.className}>{children}</body>
+    <html lang="en" className="bg-lightGray">
+      <body className={instrumentSans.className}>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
