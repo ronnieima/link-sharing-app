@@ -1,8 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import EmptyLinks from "./EmptyLinks";
-import PreviewItem from "./PreviewItem";
 import { useLinkStore } from "@/stores/useLinkStore";
+import EmptyLinks from "./EmptyLinks";
+import LinkForm from "./LinkForm";
 
 export default function Links() {
   const handleAddLink = useLinkStore((state) => state.handleAddLink);
@@ -17,21 +17,8 @@ export default function Links() {
       >
         + Add new link
       </Button>
-      <div className="flex flex-col items-center rounded-lg bg-lightGray p-5 pb-12 text-center">
-        {preview.length === 0 ? (
-          <EmptyLinks />
-        ) : (
-          <div>
-            {preview.map((platform, index) => (
-              <PreviewItem
-                key={platform.platform}
-                platform={platform}
-                index={index}
-              />
-            ))}
-          </div>
-        )}
-      </div>
+
+      {preview.length === 0 ? <EmptyLinks /> : <LinkForm />}
     </>
   );
 }

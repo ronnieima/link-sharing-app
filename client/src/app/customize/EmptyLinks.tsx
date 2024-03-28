@@ -3,7 +3,7 @@ import React from "react";
 
 export default function EmptyLinks() {
   return (
-    <div>
+    <div className="flex flex-col items-center rounded-lg bg-lightGray p-5 pb-12 text-center">
       <IllustrationEmpty />
       <h2 className="text-heading-m">Let’s get you started</h2>
       <p className="text-body-m">
