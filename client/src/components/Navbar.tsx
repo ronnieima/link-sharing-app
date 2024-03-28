@@ -1,15 +1,14 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { LinkIcon, UserCircle } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
-import { LogoSmall, Preview, ProfileDetailsHeader } from "./ui/Icons";
-import { cn } from "@/lib/utils";
+import { LogoSmall, Preview } from "./ui/Icons";
 
 export default function Navbar() {
   const path = usePathname();
-  console.log({ path });
   return (
     <nav className="h-[74px] bg-lightGray md:px-6">
       <section className="flex h-full items-center justify-between rounded-lg bg-white px-6">

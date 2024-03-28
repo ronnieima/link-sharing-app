@@ -1,7 +1,5 @@
 import MaxWidthContainer from "@/components/MaxWidthContainer";
 import { Button } from "@/components/ui/button";
-import { IllustrationEmpty } from "@/components/ui/Icons";
-import React from "react";
 import Links from "./Links";
 
 export default function page() {
@@ -19,7 +17,7 @@ export default function page() {
 
           <Links />
         </MaxWidthContainer>
-        <div className="flex justify-end rounded-b-lg border-t border-border/80 bg-white px-10 py-6">
+        <div className="border-border/80 flex justify-end rounded-b-lg border-t bg-white px-10 py-6">
           <Button className="w-[91px]">Save</Button>
         </div>
       </section>

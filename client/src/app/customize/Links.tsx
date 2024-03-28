@@ -1,22 +1,67 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { IllustrationEmpty } from "@/components/ui/Icons";
-import React from "react";
+import { useState } from "react";
+import EmptyLinks from "./EmptyLinks";
+import PreviewItem from "./PreviewItem";
+
+export const defaultPlatforms = [
+  {
+    platform: "Github",
+    link: "https://www.github.com/",
+    icon: "/images/icon-github.svg",
+  },
+  {
+    platform: "Youtube",
+    link: "https://www.youtube.com/",
+    icon: "/images/icon-youtube.svg",
+  },
+  {
+    platform: "LinkedIn",
+    link: "https://www.linkedin.com/",
+    icon: "/images/icon-linkedin.svg",
+  },
+];
+
+export type Platform = (typeof defaultPlatforms)[0];
 
 export default function Links() {
+  const [preview, setPreview] = useState<Platform[]>([]);
+  const [platforms, setPlatforms] = useState<Platform[]>(defaultPlatforms);
+  function handleAddLink() {
+    if (platforms.length > 0 && preview.length <= defaultPlatforms.length) {
+      const newPlatform = platforms.pop();
+      setPlatforms([...platforms]);
+      setPreview([...preview, newPlatform!]);
+    }
+  }
+
   return (
     <>
-      <Button variant={"outline"} className="text-heading-s  mb-8 text-purple">
+      <Button
+        onClick={() => handleAddLink()}
+        variant={"outline"}
+        className="text-heading-s  text-purple mb-8"
+      >
         + Add new link
       </Button>
       <div className="flex flex-col items-center rounded-lg bg-lightGray p-5 pb-12 text-center">
-        <IllustrationEmpty />
-        <h2 className="text-heading-m">Let’s get you started</h2>
-        <p className="text-body-m">
-          Use the “Add new link” button to get started. Once you have more than
-          one link, you can reorder and edit them. We’re here to help you share
-          your profiles with everyone!
-        </p>
+        {preview.length === 0 ? (
+          <EmptyLinks />
+        ) : (
+          <div>
+            {preview.map((platform, index) => (
+              <PreviewItem
+                key={platform.platform}
+                platform={platform}
+                index={index}
+                platforms={platforms}
+                preview={preview}
+                setPlatforms={setPlatforms}
+                setPreview={setPreview}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </>
   );
