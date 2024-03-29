@@ -1,21 +1,15 @@
-import { randomUUID } from "crypto";
-import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 export const users = pgTable("user", {
-  id: text("id")
-    .notNull()
-    .primaryKey()
-    .$default(() => randomUUID()),
+  id: uuid("id").defaultRandom().notNull().primaryKey(),
   email: text("email"),
+  emailVerified: boolean("emailVerified").default(false),
   hashedPassword: text("hashedPassword").notNull(),
 });
 
 export const sessions = pgTable("session", {
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => randomUUID())
-    .notNull(),
-  userId: text("userId")
+  id: uuid("id").defaultRandom().notNull().primaryKey(),
+  userId: uuid("userId")
     .references(() => users.id)
     .notNull(),
   expiresAt: timestamp("expires_at", {
@@ -25,14 +19,24 @@ export const sessions = pgTable("session", {
 });
 
 export const links = pgTable("link", {
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => randomUUID())
-    .notNull(),
+  id: uuid("id").defaultRandom().notNull().primaryKey(),
   platform: text("platform").notNull(),
   url: text("url").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  userId: text("userId")
+  userId: uuid("userId")
+    .references(() => users.id)
+    .notNull(),
+});
+
+export const emailVerificationCodes = pgTable("emailVerificationCode", {
+  id: uuid("id").defaultRandom().notNull().primaryKey(),
+  code: text("text").notNull(),
+  userEmail: text("userEmail").notNull(),
+  expiresAt: timestamp("expires_at", {
+    withTimezone: true,
+    mode: "date",
+  }).notNull(),
+  userId: uuid("userId")
     .references(() => users.id)
     .notNull(),
 });
