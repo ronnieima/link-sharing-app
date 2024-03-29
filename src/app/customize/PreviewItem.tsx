@@ -1,4 +1,3 @@
-"use client";
 import { Button } from "@/components/ui/button";
 import {
   FormControl,
@@ -6,6 +5,15 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
+import { Grip, Link } from "lucide-react";
+import { useFormContext } from "react-hook-form";
+import {
+  Platform,
+  PlatformKeys,
+  platforms,
+  useLinkStore,
+} from "../../stores/useLinkStore";
+
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -14,20 +22,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { PlatformKeys, platforms, useLinkStore } from "@/stores/useLinkStore";
-import { Grip, Link } from "lucide-react";
-import { useFormContext } from "react-hook-form";
 type Props = {
-  platform: string;
   index: number;
 };
 
 export default function PreviewItem({ index }: Props) {
-  const handleRemoveLink = useLinkStore((state) => state.handleRemoveLink);
+  const decCounter = useLinkStore((state) => state.decCounter);
 
   const { control, watch } = useFormContext();
-  const currPlatform =
-    platforms[watch(index.toString()) as PlatformKeys] || platforms.github;
+
+  const selectedPlatformValue: PlatformKeys =
+    watch(index.toString()) || "github";
+
+  const selectPlatformObj = platforms[selectedPlatformValue];
+
   return (
     <div className="flex w-full flex-col  gap-3 rounded-lg bg-lightGray p-5  text-center">
       <div className="flex justify-between">
@@ -37,7 +45,7 @@ export default function PreviewItem({ index }: Props) {
         <Button
           variant={"link"}
           className="m-0 block w-16 p-0"
-          onClick={() => handleRemoveLink(index)}
+          onClick={decCounter}
         >
           Remove
         </Button>
@@ -52,22 +60,23 @@ export default function PreviewItem({ index }: Props) {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <SelectTrigger>
                   <div className="flex items-center gap-2">
-                    <img src={currPlatform.icon} alt="logo" />
+                    <img src={selectPlatformObj.icon} alt="logo" />
                     <SelectValue className="text-left" />
                   </div>
                 </SelectTrigger>
                 <SelectContent>
-                  {Object.keys(platforms).map((platform) => (
-                    <SelectItem
-                      value={platform}
-                      key={platform}
-                      icon={platforms[platform as PlatformKeys].icon}
-                    >
-                      <span>
-                        {platforms[platform as PlatformKeys].platform}
-                      </span>
-                    </SelectItem>
-                  ))}
+                  {Object.keys(platforms).map((platform) => {
+                    const platformObj = platforms[platform as PlatformKeys];
+                    return (
+                      <SelectItem
+                        value={platform}
+                        key={platform}
+                        icon={platformObj.icon}
+                      >
+                        <span>{platformObj.platform}</span>
+                      </SelectItem>
+                    );
+                  })}
                 </SelectContent>
               </Select>
             </FormControl>
@@ -75,7 +84,7 @@ export default function PreviewItem({ index }: Props) {
         )}
       />
       <FormField
-        name={`${currPlatform.value}Link`}
+        name={`${index.toString()}Link`}
         control={control}
         render={({ field }) => (
           <FormItem className="text-left">
@@ -85,8 +94,8 @@ export default function PreviewItem({ index }: Props) {
                 <Input
                   type="text"
                   icon={<Link />}
-                  alt={`${currPlatform.platform} icon`}
-                  placeholder={`e.g. ${currPlatform.link}johnappleseed`}
+                  alt={`${selectPlatformObj.platform} icon`}
+                  placeholder={`e.g. ${selectPlatformObj.link}johnappleseed`}
                   className="pl-8"
                   {...field}
                 />

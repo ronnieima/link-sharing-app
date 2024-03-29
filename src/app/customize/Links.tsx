@@ -5,20 +5,20 @@ import EmptyLinks from "./EmptyLinks";
 import LinkForm from "./LinkForm";
 
 export default function Links() {
-  const handleAddLink = useLinkStore((state) => state.handleAddLink);
-  const preview = useLinkStore((state) => state.preview);
+  const counter = useLinkStore((state) => state.counter);
+  const incCounter = useLinkStore((state) => state.incCounter);
 
   return (
     <>
       <Button
-        onClick={handleAddLink}
+        onClick={incCounter}
         variant={"outline"}
         className="text-heading-s  mb-8 text-purple"
       >
         + Add new link
       </Button>
 
-      {preview.length === 0 ? <EmptyLinks /> : <LinkForm />}
+      {counter === 0 ? <EmptyLinks /> : <LinkForm />}
     </>
   );
 }
