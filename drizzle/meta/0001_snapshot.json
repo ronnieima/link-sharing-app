@@ -1,6 +1,6 @@
 {
-  "id": "f6b9e5cd-e416-471a-bd61-16c5f95b0e7a",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "c9f86339-608e-416e-bce2-e8edf70d1bdb",
+  "prevId": "f6b9e5cd-e416-471a-bd61-16c5f95b0e7a",
   "version": "5",
   "dialect": "pg",
   "tables": {
@@ -171,7 +171,7 @@
           "name": "email",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "emailVerified": {
           "name": "emailVerified",
@@ -190,7 +190,15 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "user_email_unique": {
+          "name": "user_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      }
     }
   },
   "enums": {},

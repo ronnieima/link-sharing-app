@@ -1,15 +1,15 @@
 import { boolean, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 export const users = pgTable("user", {
-  id: uuid("id").defaultRandom().notNull().primaryKey(),
-  email: text("email"),
+  id: text("id").notNull().primaryKey(),
+  email: text("email").unique().notNull(),
   emailVerified: boolean("emailVerified").default(false),
   hashedPassword: text("hashedPassword").notNull(),
 });
 
 export const sessions = pgTable("session", {
-  id: uuid("id").defaultRandom().notNull().primaryKey(),
-  userId: uuid("userId")
+  id: text("id").notNull().primaryKey(),
+  userId: text("userId")
     .references(() => users.id)
     .notNull(),
   expiresAt: timestamp("expires_at", {
@@ -23,7 +23,7 @@ export const links = pgTable("link", {
   platform: text("platform").notNull(),
   url: text("url").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  userId: uuid("userId")
+  userId: text("userId")
     .references(() => users.id)
     .notNull(),
 });
@@ -36,7 +36,7 @@ export const emailVerificationCodes = pgTable("emailVerificationCode", {
     withTimezone: true,
     mode: "date",
   }).notNull(),
-  userId: uuid("userId")
+  userId: text("userId")
     .references(() => users.id)
     .notNull(),
 });

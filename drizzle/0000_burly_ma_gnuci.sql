@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS "emailVerificationCode" (
 	"text" text NOT NULL,
 	"userEmail" text NOT NULL,
 	"expires_at" timestamp with time zone NOT NULL,
-	"userId" uuid NOT NULL
+	"userId" text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "link" (
@@ -11,17 +11,17 @@ CREATE TABLE IF NOT EXISTS "link" (
 	"platform" text NOT NULL,
 	"url" text NOT NULL,
 	"createdAt" timestamp DEFAULT now() NOT NULL,
-	"userId" uuid NOT NULL
+	"userId" text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "session" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"userId" uuid NOT NULL,
+	"id" text PRIMARY KEY NOT NULL,
+	"userId" text NOT NULL,
 	"expires_at" timestamp with time zone NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "user" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"id" text PRIMARY KEY NOT NULL,
 	"email" text,
 	"emailVerified" boolean DEFAULT false,
 	"hashedPassword" text NOT NULL

@@ -19,7 +19,13 @@ type Props = {
   icon: string;
 };
 
-export default function LabelInput({ label, value, type, placeholder }: Props) {
+export default function LabelInput({
+  label,
+  value,
+  type,
+  placeholder,
+  icon,
+}: Props) {
   const { control } = useFormContext();
 
   return (
@@ -30,8 +36,9 @@ export default function LabelInput({ label, value, type, placeholder }: Props) {
         <FormItem>
           <FormLabel className="text-body-s">{label}</FormLabel>
           <FormControl className="peer">
-            <div className="aria-invalid:border-red group relative ">
+            <div className="group relative aria-invalid:border-red ">
               <Input
+                icon={icon}
                 type={type}
                 placeholder={placeholder}
                 className="group-aria-invalid:border group-aria-invalid:border-red"

@@ -1,12 +1,13 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import LabelInput from "@/components/ui/LabelInput";
-import Link from "next/link";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
+import LabelInput from "@/components/ui/LabelInput";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { registerUser } from "../actions";
 
 const registerFormSchema = z
   .object({
@@ -32,12 +33,12 @@ export default function RegisterForm() {
 
   const { handleSubmit } = form;
 
-  function onSubmit() {}
-
   return (
     <Form {...form}>
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(async (values) => {
+          await registerUser(values.email, values.password);
+        })}
         className="mx-auto space-y-10 md:w-[476px] md:rounded-lg md:bg-white md:p-10 md:shadow-sm"
       >
         <header className="space-y-2">
@@ -71,7 +72,9 @@ export default function RegisterForm() {
           <p className="text-body-s text-gray">
             Password must contain at least 8 characters
           </p>
-          <Button variant={"default"}>Create new account</Button>
+          <Button type="submit" variant={"default"}>
+            Create new account
+          </Button>
         </div>
         <footer className="text-body-m flex w-full flex-col items-center justify-center md:flex-row md:gap-1">
           <p>Already have an account?</p>
