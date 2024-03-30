@@ -58,7 +58,7 @@ export default function PreviewItem({ link, index }: Props) {
                 onValueChange={async (newPlatform) =>
                   await updateLink(link.id, newPlatform)
                 }
-                defaultValue={field.value}
+                defaultValue={link.platform}
               >
                 <SelectTrigger>
                   <div className="flex items-center gap-2">
