@@ -13,7 +13,7 @@ export default async function ProfilePage() {
   }
   return (
     <main className="p-4">
-      <div className="flex flex-col gap-10 rounded-lg bg-white p-6">
+      <div className="relative flex flex-col gap-10 rounded-lg bg-white p-6 md:h-[779px] md:p-10">
         <header>
           <h1 className="heading-m">Profile Details</h1>
           <p className="body-m text-gray">
@@ -37,9 +37,7 @@ export default async function ProfilePage() {
               </p>
             </div>
           </section>
-          <section className="rounded-lg bg-lightGray p-5">
-            <ProfileForm user={user} />
-          </section>
+          <ProfileForm user={user} />
         </div>
       </div>
     </main>

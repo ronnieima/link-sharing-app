@@ -1,4 +1,4 @@
-export function LogoSmall() {
+export function LogoSmall({ className }: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,6 +6,7 @@ export function LogoSmall() {
       height="32"
       fill="none"
       viewBox="0 0 32 32"
+      className={className}
     >
       <path
         fill="#633CFF"
@@ -17,7 +18,7 @@ export function LogoSmall() {
   );
 }
 
-export function Preview() {
+export function Preview({ className }: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -25,6 +26,7 @@ export function Preview() {
       height="20"
       fill="none"
       viewBox="0 0 20 20"
+      className={className}
     >
       <path
         fill="#633CFF"
