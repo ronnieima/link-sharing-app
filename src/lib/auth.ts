@@ -14,7 +14,7 @@ export const lucia = new Lucia(adapter, {
       email: attributes.email,
       emailVerified: attributes.emailVerified,
       firstName: attributes.firstName,
-      lastName: attributes.firstName,
+      lastName: attributes.lastName,
     };
   },
   sessionCookie: {

@@ -5,7 +5,6 @@ import React from "react";
 import ProfileForm from "./ProfileForm";
 import { Button } from "@/components/ui/button";
 import LogoutButton from "@/components/ui/LogoutButton";
-import { z } from "zod";
 
 export default async function ProfilePage() {
   const { user } = await validateRequest();
@@ -39,7 +38,7 @@ export default async function ProfilePage() {
             </div>
           </section>
           <section className="rounded-lg bg-lightGray p-5">
-            <ProfileForm email={user.email} />
+            <ProfileForm user={user} />
           </section>
         </div>
       </div>
