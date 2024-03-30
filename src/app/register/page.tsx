@@ -1,8 +1,14 @@
 import MaxWidthContainer from "@/components/MaxWidthContainer";
 import Image from "next/image";
 import RegisterForm from "./RegisterForm";
+import { validateRequest } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
-export default function LoginPage() {
+export default async function RegisterPage() {
+  const { user } = await validateRequest();
+  if (user) {
+    return redirect("/");
+  }
   return (
     <main className="bg-lightGray ">
       <MaxWidthContainer className="flex items-center justify-center">
