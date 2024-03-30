@@ -26,7 +26,6 @@ export default async function CustomizePage() {
             the world!
           </p>
           <span>User id: {user.id}</span>
-          <LogoutButton />
         </header>
 
         <AddNewLinkButton userId={user.id} />

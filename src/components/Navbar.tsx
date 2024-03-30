@@ -12,7 +12,7 @@ export default function Navbar() {
   return (
     <nav className="h-[74px] bg-lightGray md:px-6">
       <section className="flex h-full items-center justify-between rounded-lg bg-white px-6">
-        <Link href="/">
+        <Link href="/customize">
           <LogoSmall />
         </Link>
         <div className="flex h-full items-center">

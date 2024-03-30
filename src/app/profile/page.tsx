@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 import ProfileForm from "./ProfileForm";
 import { Button } from "@/components/ui/button";
+import LogoutButton from "@/components/ui/LogoutButton";
 
 export default async function ProfilePage() {
   const { user } = await validateRequest();
@@ -41,7 +42,8 @@ export default async function ProfilePage() {
           </section>
         </div>
       </div>
-      <section className="rounded-b-lg border-t border-border bg-white p-4">
+      <section className=" space-y-4 rounded-b-lg border-t border-border bg-white p-4">
+        <LogoutButton />
         <Button className="m-0 p-0">Save</Button>
       </section>
     </main>
