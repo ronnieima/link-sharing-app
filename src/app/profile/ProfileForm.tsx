@@ -9,12 +9,24 @@ export default function ProfileForm() {
 
   return (
     <Form {...form}>
-      <form>
+      <form className="space-y-3">
         <LabelInput
           label="First name*"
           placeholder="Enter first name"
           value="firstName"
           type="text"
+        />
+        <LabelInput
+          label="Last name*"
+          placeholder="Enter last name"
+          value="lastName"
+          type="text"
+        />
+        <LabelInput
+          label="Email"
+          placeholder="Enter email"
+          value="email"
+          type="email"
         />
       </form>
     </Form>
