@@ -39,7 +39,8 @@ export default function PreviewItem({ link, index }: Props) {
         <Button
           variant={"link"}
           className="m-0 block w-16 p-0"
-          onClick={async () => {
+          onClick={async (e) => {
+            e.preventDefault();
             await removeLink(link.id);
           }}
         >
@@ -95,6 +96,7 @@ export default function PreviewItem({ link, index }: Props) {
                 <Input
                   type="text"
                   icon={<LinkIcon />}
+                  defaultValue={link.url}
                   alt={`${selectPlatformObj.platform} icon`}
                   placeholder={`e.g. ${selectPlatformObj.link}johnappleseed`}
                   className="pl-8"

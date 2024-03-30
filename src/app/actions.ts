@@ -110,11 +110,25 @@ export async function logoutUser() {
 }
 
 export async function addLink(userId: string) {
+  const MAX_LINKS_AMOUNT = 5;
+
   try {
-    const result = await db.insert(links).values({
+    const userLinks = await db.execute(sql`
+    SELECT COUNT(*)
+    FROM ${links}
+    WHERE ${links.userId} = ${userId}
+  `);
+
+    const currentRowCount = parseInt(userLinks.rows[0].count as string);
+    if (currentRowCount >= MAX_LINKS_AMOUNT)
+      return {
+        error: `Maximum amount of links (${MAX_LINKS_AMOUNT}) reached.`,
+      };
+
+    await db.insert(links).values({
       userId,
     });
-    revalidatePath("/customize");
+    revalidatePath("/customize", "page");
     return { message: `Row added successfully` };
   } catch (error) {
     return { error: "Unknown error ooccured" };
@@ -127,6 +141,7 @@ export async function getLinks(userId: string) {
       SELECT *
       FROM ${links}
       WHERE ${links.userId} = ${userId}
+      ORDER BY ${links.createdAt}
     `);
 
     return userLinks.rows;
@@ -137,15 +152,13 @@ export async function getLinks(userId: string) {
 
 export async function updateLink(linkId: string, platform: string) {
   try {
-    console.log(`changing ${linkId} to ${platform}`);
-    const res = await db
+    await db
       .update(links)
       .set({
         platform,
       })
       .where(eq(links.id, linkId));
-    console.log(res);
-    console.log("done");
+    revalidatePath("/customize");
   } catch (error) {
     return { error: "Failed to update link" };
   }
