@@ -22,6 +22,20 @@
       "when": 1711793479804,
       "tag": "0002_fat_psynapse",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1711801975218,
+      "tag": "0003_happy_earthquake",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1711803959856,
+      "tag": "0004_outgoing_black_tom",
+      "breakpoints": true
     }
   ]
 }

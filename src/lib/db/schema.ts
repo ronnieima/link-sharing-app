@@ -1,3 +1,4 @@
+import { InferSelectModel } from "drizzle-orm";
 import { boolean, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 export const users = pgTable("user", {
@@ -20,13 +21,15 @@ export const sessions = pgTable("session", {
 
 export const links = pgTable("link", {
   id: uuid("id").defaultRandom().notNull().primaryKey(),
-  platform: text("platform").notNull(),
-  url: text("url").notNull(),
+  platform: text("platform").default("github").notNull(),
+  url: text("url").default("").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   userId: text("userId")
     .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
 });
+
+export type LinkType = InferSelectModel<typeof links>;
 
 export const emailVerificationCodes = pgTable("emailVerificationCode", {
   id: uuid("id").defaultRandom().notNull().primaryKey(),

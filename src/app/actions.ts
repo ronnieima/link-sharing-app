@@ -1,11 +1,12 @@
 "use server";
 import { lucia, validateRequest } from "@/lib/auth";
 import db from "@/lib/db";
-import { users } from "@/lib/db/schema";
+import { links, users } from "@/lib/db/schema";
 import { loginFormSchema } from "@/lib/zod";
 import { NeonDbError } from "@neondatabase/serverless";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { generateId } from "lucia";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { Argon2id } from "oslo/password";
@@ -106,4 +107,58 @@ export async function logoutUser() {
     sessionCookie.attributes,
   );
   return redirect("/login");
+}
+
+export async function addLink(userId: string) {
+  try {
+    const result = await db.insert(links).values({
+      userId,
+    });
+    revalidatePath("/customize");
+    return { message: `Row added successfully` };
+  } catch (error) {
+    return { error: "Unknown error ooccured" };
+  }
+}
+
+export async function getLinks(userId: string) {
+  try {
+    const userLinks = await db.execute(sql`
+      SELECT *
+      FROM ${links}
+      WHERE ${links.userId} = ${userId}
+    `);
+
+    return userLinks.rows;
+  } catch (error) {
+    return { error: "Unknown error ooccured" };
+  }
+}
+
+export async function updateLink(linkId: string, platform: string) {
+  try {
+    console.log(`changing ${linkId} to ${platform}`);
+    const res = await db
+      .update(links)
+      .set({
+        platform,
+      })
+      .where(eq(links.id, linkId));
+    console.log(res);
+    console.log("done");
+  } catch (error) {
+    return { error: "Failed to update link" };
+  }
+}
+
+export async function removeLink(linkId: string) {
+  try {
+    await db.execute(sql`
+      DELETE FROM ${links}
+      WHERE ${links.id} = ${linkId}
+    `);
+    revalidatePath("/customize");
+  } catch (error) {
+    return { error: "Failed to remove link" };
+  }
 }

@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   FormControl,
@@ -5,14 +6,9 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
-import { Grip, Link } from "lucide-react";
+import { Grip, LinkIcon } from "lucide-react";
 import { useFormContext } from "react-hook-form";
-import {
-  Platform,
-  PlatformKeys,
-  platforms,
-  useLinkStore,
-} from "../../stores/useLinkStore";
+import { PlatformKeys, platforms } from "../../stores/useLinkStore";
 
 import { Input } from "@/components/ui/input";
 import {
@@ -22,19 +18,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { LinkType } from "@/lib/db/schema";
+import { removeLink, updateLink } from "../actions";
 type Props = {
+  link: LinkType;
   index: number;
 };
 
-export default function PreviewItem({ index }: Props) {
-  const decCounter = useLinkStore((state) => state.decCounter);
+export default function PreviewItem({ link, index }: Props) {
+  const { control } = useFormContext();
 
-  const { control, watch } = useFormContext();
-
-  const selectedPlatformValue: PlatformKeys =
-    watch(index.toString()) || "github";
-
-  const selectPlatformObj = platforms[selectedPlatformValue];
+  const selectPlatformObj = platforms[link.platform as PlatformKeys];
 
   return (
     <div className="flex w-full flex-col  gap-3 rounded-lg bg-lightGray p-5  text-center">
@@ -45,19 +39,26 @@ export default function PreviewItem({ index }: Props) {
         <Button
           variant={"link"}
           className="m-0 block w-16 p-0"
-          onClick={decCounter}
+          onClick={async () => {
+            await removeLink(link.id);
+          }}
         >
           Remove
         </Button>
       </div>
       <FormField
-        name={index.toString()}
+        name={`${link.id}Platform`}
         control={control}
         render={({ field }) => (
           <FormItem className="text-left">
             <FormLabel>Platform</FormLabel>
             <FormControl>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={async (newPlatform) =>
+                  await updateLink(link.id, newPlatform)
+                }
+                defaultValue={field.value}
+              >
                 <SelectTrigger>
                   <div className="flex items-center gap-2">
                     <img src={selectPlatformObj.icon} alt="logo" />
@@ -84,7 +85,7 @@ export default function PreviewItem({ index }: Props) {
         )}
       />
       <FormField
-        name={`${index.toString()}Link`}
+        name={`${link.id}Link`}
         control={control}
         render={({ field }) => (
           <FormItem className="text-left">
@@ -93,7 +94,7 @@ export default function PreviewItem({ index }: Props) {
               <div className="relative">
                 <Input
                   type="text"
-                  icon={<Link />}
+                  icon={<LinkIcon />}
                   alt={`${selectPlatformObj.platform} icon`}
                   placeholder={`e.g. ${selectPlatformObj.link}johnappleseed`}
                   className="pl-8"
