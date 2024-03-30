@@ -10,7 +10,7 @@ export const users = pgTable("user", {
 export const sessions = pgTable("session", {
   id: text("id").notNull().primaryKey(),
   userId: text("userId")
-    .references(() => users.id)
+    .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
   expiresAt: timestamp("expires_at", {
     withTimezone: true,
@@ -24,7 +24,7 @@ export const links = pgTable("link", {
   url: text("url").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   userId: text("userId")
-    .references(() => users.id)
+    .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
 });
 
@@ -37,6 +37,6 @@ export const emailVerificationCodes = pgTable("emailVerificationCode", {
     mode: "date",
   }).notNull(),
   userId: text("userId")
-    .references(() => users.id)
+    .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
 });
