@@ -16,7 +16,7 @@ type Props = {
   value: string;
   type: React.HTMLInputTypeAttribute;
   placeholder: string;
-  icon: string;
+  icon?: string;
 };
 
 export default function LabelInput({
