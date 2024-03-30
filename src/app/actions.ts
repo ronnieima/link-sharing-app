@@ -1,5 +1,5 @@
 "use server";
-import { lucia } from "@/lib/auth";
+import { lucia, validateRequest } from "@/lib/auth";
 import db from "@/lib/db";
 import { users } from "@/lib/db/schema";
 import { loginFormSchema } from "@/lib/zod";
@@ -7,6 +7,7 @@ import { NeonDbError } from "@neondatabase/serverless";
 import { eq } from "drizzle-orm";
 import { generateId } from "lucia";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { Argon2id } from "oslo/password";
 
 export async function registerUser(email: string, password: string) {
@@ -26,7 +27,11 @@ export async function registerUser(email: string, password: string) {
     });
     const session = await lucia.createSession(userId, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
-    cookies().set(sessionCookie);
+    cookies().set(
+      sessionCookie.name,
+      sessionCookie.value,
+      sessionCookie.attributes,
+    );
   } catch (error) {
     if (error instanceof NeonDbError) {
       switch (error.code) {
@@ -38,11 +43,18 @@ export async function registerUser(email: string, password: string) {
           };
       }
     }
-    return { error: "Failed to create new account." };
+    return { error: "An unknown error ooccured" };
   }
+  return redirect("/");
 }
 
 export async function loginUser(email: string, password: string) {
+  const result = loginFormSchema.safeParse({ email, password });
+
+  if (!result.success) {
+    return { error: "Invalid email or password" };
+  }
+
   const user = await db.query.users.findFirst({
     where: eq(users.email, email),
   });
@@ -73,11 +85,29 @@ export async function loginUser(email: string, password: string) {
   }
   const session = await lucia.createSession(user.id, {});
   const sessionCookie = lucia.createSessionCookie(session.id);
-  return new Response(null, {
-    status: 302,
-    headers: {
-      Location: "/",
-      "Set-Cookie": sessionCookie.serialize(),
-    },
-  });
+  cookies().set(
+    sessionCookie.name,
+    sessionCookie.value,
+    sessionCookie.attributes,
+  );
+  return redirect("/");
+}
+
+export async function logoutUser() {
+  const { session } = await validateRequest();
+  if (!session) {
+    return {
+      error: "Unauthorized",
+    };
+  }
+
+  await lucia.invalidateSession(session.id);
+
+  const sessionCookie = lucia.createBlankSessionCookie();
+  cookies().set(
+    sessionCookie.name,
+    sessionCookie.value,
+    sessionCookie.attributes,
+  );
+  return redirect("/login");
 }

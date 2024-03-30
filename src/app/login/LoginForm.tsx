@@ -7,6 +7,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
+import { loginUser } from "../actions";
 
 const loginFormSchema = z.object({
   email: z.string({ required_error: "Can't be empty" }).email().trim().min(1),
@@ -22,7 +23,10 @@ export default function LoginForm() {
 
   const { handleSubmit } = form;
 
-  function onSubmit() {}
+  async function onSubmit(values: LoginFormSchemaType) {
+    const { email, password } = values;
+    await loginUser(email, password);
+  }
 
   return (
     <Form {...form}>
