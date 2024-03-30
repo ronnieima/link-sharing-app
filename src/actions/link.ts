@@ -60,14 +60,23 @@ export async function updateLink(linkId: string, platform: string) {
   }
 }
 
-export async function removeLink(linkId: string) {
+export async function updateLinks(
+  values: { links: { platform: string; url: string }[] },
+  userId: string,
+) {
+  const newLinksWithUserId = values.links.map((newLink) => ({
+    ...newLink,
+    userId,
+  }));
   try {
-    await db.execute(sql`
-      DELETE FROM ${links}
-      WHERE ${links.id} = ${linkId}
-    `);
-    revalidatePath("/customize");
+    if (values.links.length !== 0) {
+      await db.delete(links).where(eq(links.userId, userId));
+      await db.insert(links).values(newLinksWithUserId);
+    } else {
+      await db.delete(links).where(eq(links.userId, userId));
+    }
+    return { message: "Success" };
   } catch (error) {
-    return { error: "Failed to remove link" };
+    return { error: "Failed to update links" };
   }
 }

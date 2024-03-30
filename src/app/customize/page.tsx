@@ -1,10 +1,7 @@
+import { getLinks } from "@/actions/link";
 import MaxWidthContainer from "@/components/MaxWidthContainer";
-import { Button } from "@/components/ui/button";
 import { validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import LogoutButton from "@/components/ui/LogoutButton";
-import { getLinks } from "@/actions/link";
-import AddNewLinkButton from "./AddNewLinkButton";
 import EmptyLinks from "./EmptyLinks";
 import LinkForm from "./LinkForm";
 
@@ -18,7 +15,7 @@ export default async function CustomizePage() {
 
   return (
     <main className="p-4">
-      <MaxWidthContainer className="rounded-t-lg bg-white p-6 shadow-sm lg:p-10">
+      <div className="rounded-t-lg bg-white p-6 shadow-sm lg:p-10">
         <header className="pb-10">
           <h1 className="heading-m">Customize your links</h1>
           <p className="body-m">
@@ -31,13 +28,8 @@ export default async function CustomizePage() {
           )}
         </header>
 
-        <AddNewLinkButton userId={user.id} />
-        {!links.data || links.data.length === 0 ? (
-          <EmptyLinks />
-        ) : (
-          <LinkForm links={links.data} />
-        )}
-      </MaxWidthContainer>
+        <LinkForm links={links?.data} userId={user.id} />
+      </div>
     </main>
   );
 }

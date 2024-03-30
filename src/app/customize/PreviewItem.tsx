@@ -5,6 +5,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Grip, LinkIcon } from "lucide-react";
 import {
@@ -22,6 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useEffect, useState } from "react";
 type Props = {
   link: FieldArrayWithId<
     {
@@ -38,10 +40,18 @@ type Props = {
 };
 
 export default function PreviewItem({ link, index, remove }: Props) {
-  const { control, getValues } = useFormContext();
+  const { control, watch, setValue } = useFormContext();
+  const [currentPlatform, setCurrentPlatform] = useState(link.platform);
+  const selectedPlatform = watch(`links.${index}.platform`);
 
-  console.log(link.platform);
-  const selectPlatformObj = platforms[link.platform as PlatformKeys];
+  useEffect(() => {
+    setCurrentPlatform(selectedPlatform);
+  }, [selectedPlatform, index, setValue]);
+  const selectPlatformObj = platforms[currentPlatform as PlatformKeys];
+
+  const rootDomain = selectPlatformObj.link;
+  const regexPattern = `^(https?:\\/\\/)?(www\\.)?${rootDomain.replace(/\./g, "\\.")}\\/.+$`;
+  const regex = new RegExp(regexPattern);
 
   return (
     <div className="flex w-full flex-col  gap-3 rounded-lg bg-lightGray p-5  text-center">
@@ -63,11 +73,19 @@ export default function PreviewItem({ link, index, remove }: Props) {
       <FormField
         name={`links.${index}.platform` as const}
         control={control}
+        rules={{ required: true }}
         render={({ field }) => (
           <FormItem className="text-left">
             <FormLabel>Platform</FormLabel>
             <FormControl>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={(value) => {
+                  setValue(`links.${index}.url`, "");
+                  field.onChange(value);
+                }}
+                value={field.value}
+                defaultValue={field.value}
+              >
                 <SelectTrigger>
                   <div className="flex items-center gap-2">
                     <img src={selectPlatformObj?.icon} alt="logo" />
@@ -96,6 +114,13 @@ export default function PreviewItem({ link, index, remove }: Props) {
       <FormField
         name={`links.${index}.url` as const}
         control={control}
+        rules={{
+          required: { value: true, message: "Required" },
+          pattern: {
+            value: regex,
+            message: "Invalid URL",
+          },
+        }}
         render={({ field }) => (
           <FormItem className="text-left">
             <FormLabel>Link</FormLabel>
@@ -104,14 +129,14 @@ export default function PreviewItem({ link, index, remove }: Props) {
                 <Input
                   type="text"
                   icon={<LinkIcon />}
-                  defaultValue={link.url}
                   alt={`${selectPlatformObj?.platform} icon`}
-                  placeholder={`e.g. ${selectPlatformObj?.link}johnappleseed`}
+                  placeholder={`e.g. https://www.${selectPlatformObj?.link}/johnappleseed`}
                   className="pl-8"
                   {...field}
                 />
               </div>
             </FormControl>
+            <FormMessage className="text-red" />
           </FormItem>
         )}
       />
