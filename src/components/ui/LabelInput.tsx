@@ -34,9 +34,9 @@ export default function LabelInput({
       name={value}
       control={control}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className="md:flex md:flex-row md:items-center md:justify-between">
           <FormLabel className="body-s">{label}</FormLabel>
-          <FormControl className="peer">
+          <FormControl className="peer md:w-1/2">
             <div className="group relative aria-invalid:border-red ">
               <Input
                 icon={icon}

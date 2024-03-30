@@ -69,12 +69,12 @@ export default function ProfileForm({ user }: Props) {
           value="email"
           type="email"
         />
-        <section className=" space-y-4 rounded-b-lg border-t border-border bg-white p-4">
+        <section className="flex w-full flex-col items-center gap-4 rounded-b-lg border-t border-border bg-white p-4 md:flex-row md:justify-end">
           <LogoutButton />
           <Button
             type="submit"
             disabled={!isDirty || isSubmitting}
-            className="m-0 p-0"
+            className="m-0 p-0 md:w-[91px]"
           >
             Save
           </Button>
