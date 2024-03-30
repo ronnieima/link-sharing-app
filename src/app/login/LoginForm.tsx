@@ -7,8 +7,8 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
-import { loginUser } from "../actions";
 import { useState } from "react";
+import { loginUser } from "@/actions/auth";
 
 const loginFormSchema = z.object({
   email: z.string({ required_error: "Can't be empty" }).email().trim().min(1),

@@ -7,7 +7,11 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Grip, LinkIcon } from "lucide-react";
-import { useFormContext } from "react-hook-form";
+import {
+  FieldArrayWithId,
+  UseFieldArrayRemove,
+  useFormContext,
+} from "react-hook-form";
 import { PlatformKeys, platforms } from "../../stores/useLinkStore";
 
 import { Input } from "@/components/ui/input";
@@ -18,16 +22,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { LinkType } from "@/lib/db/schema";
-import { removeLink, updateLink } from "../actions";
 type Props = {
-  link: LinkType;
+  link: FieldArrayWithId<
+    {
+      links: {
+        platform: string;
+        url: string;
+      }[];
+    },
+    "links",
+    "id"
+  >;
   index: number;
+  remove: UseFieldArrayRemove;
 };
 
-export default function PreviewItem({ link, index }: Props) {
-  const { control } = useFormContext();
+export default function PreviewItem({ link, index, remove }: Props) {
+  const { control, getValues } = useFormContext();
 
+  console.log(link.platform);
   const selectPlatformObj = platforms[link.platform as PlatformKeys];
 
   return (
@@ -41,28 +54,23 @@ export default function PreviewItem({ link, index }: Props) {
           className="m-0 block w-16 p-0"
           onClick={async (e) => {
             e.preventDefault();
-            await removeLink(link.id);
+            remove(index);
           }}
         >
           Remove
         </Button>
       </div>
       <FormField
-        name={`${link.id}Platform`}
+        name={`links.${index}.platform` as const}
         control={control}
         render={({ field }) => (
           <FormItem className="text-left">
             <FormLabel>Platform</FormLabel>
             <FormControl>
-              <Select
-                onValueChange={async (newPlatform) =>
-                  await updateLink(link.id, newPlatform)
-                }
-                defaultValue={link.platform}
-              >
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <SelectTrigger>
                   <div className="flex items-center gap-2">
-                    <img src={selectPlatformObj.icon} alt="logo" />
+                    <img src={selectPlatformObj?.icon} alt="logo" />
                     <SelectValue className="text-left" />
                   </div>
                 </SelectTrigger>
@@ -73,7 +81,7 @@ export default function PreviewItem({ link, index }: Props) {
                       <SelectItem
                         value={platform}
                         key={platform}
-                        icon={platformObj.icon}
+                        icon={platformObj?.icon}
                       >
                         <span>{platformObj.platform}</span>
                       </SelectItem>
@@ -86,7 +94,7 @@ export default function PreviewItem({ link, index }: Props) {
         )}
       />
       <FormField
-        name={`${link.id}Link`}
+        name={`links.${index}.url` as const}
         control={control}
         render={({ field }) => (
           <FormItem className="text-left">
@@ -97,8 +105,8 @@ export default function PreviewItem({ link, index }: Props) {
                   type="text"
                   icon={<LinkIcon />}
                   defaultValue={link.url}
-                  alt={`${selectPlatformObj.platform} icon`}
-                  placeholder={`e.g. ${selectPlatformObj.link}johnappleseed`}
+                  alt={`${selectPlatformObj?.platform} icon`}
+                  placeholder={`e.g. ${selectPlatformObj?.link}johnappleseed`}
                   className="pl-8"
                   {...field}
                 />

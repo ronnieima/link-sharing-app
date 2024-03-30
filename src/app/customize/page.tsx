@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import LogoutButton from "@/components/ui/LogoutButton";
-import { getLinks } from "../actions";
+import { getLinks } from "@/actions/link";
 import AddNewLinkButton from "./AddNewLinkButton";
 import EmptyLinks from "./EmptyLinks";
 import LinkForm from "./LinkForm";
@@ -38,9 +38,6 @@ export default async function CustomizePage() {
           <LinkForm links={links.data} />
         )}
       </MaxWidthContainer>
-      <section className="rounded-b-lg border-t border-border bg-white p-4">
-        <Button className="m-0 p-0">Save</Button>
-      </section>
     </main>
   );
 }

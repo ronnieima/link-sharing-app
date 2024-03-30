@@ -5,9 +5,19 @@ import { generateRandomString, alphabet } from "oslo/crypto";
 import db from "./db";
 import { emailVerificationCodes } from "./db/schema";
 import { eq } from "drizzle-orm";
+import { z } from "zod";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+// From https://github.com/colinhacks/zod/discussions/839#discussioncomment-8142768
+export function getZodEnumFromObjectKeys<
+  TI extends Record<string, any>,
+  R extends string = TI extends Record<infer R, any> ? R : never,
+>(input: TI): z.ZodEnum<[R, ...R[]]> {
+  const [firstKey, ...otherKeys] = Object.keys(input) as [R, ...R[]];
+  return z.enum([firstKey, ...otherKeys]);
 }
 
 export async function generateEmailVerificationCode(

@@ -113,7 +113,7 @@ SelectLabel.displayName = SelectPrimitive.Label.displayName;
 
 interface SelectItemProps
   extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item> {
-  icon: string; // Define the icon prop
+  icon?: string; // Define the icon prop
 }
 
 const SelectItem = React.forwardRef<

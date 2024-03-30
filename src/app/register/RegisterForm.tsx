@@ -6,7 +6,7 @@ import LabelInput from "@/components/ui/LabelInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { registerUser } from "../actions";
+import { registerUser } from "@/actions/registerUser";
 import { registerFormSchema, RegisterFormSchemaType } from "@/lib/zod";
 import { useState } from "react";
 import { useRouter } from "next/navigation";

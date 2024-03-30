@@ -1,6 +1,6 @@
 "use client";
 
-import { logoutUser } from "@/app/actions";
+import { logoutUser } from "@/actions/auth";
 import { Button } from "./button";
 
 export default function LogoutButton() {
