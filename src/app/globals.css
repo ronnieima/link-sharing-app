@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 @layer components {
-  .text-heading-m {
+  .heading-m {
     @apply text-[24px] font-bold leading-[150%] md:text-[32px];
   }
-  .text-heading-s {
+  .heading-s {
     @apply text-[16px] font-bold leading-[150%];
   }
 
-  .text-body-m {
+  .body-m {
     @apply text-[16px] font-normal leading-[150%] text-darkGray;
   }
-  .text-body-s {
+  .body-s {
     @apply text-[12px] font-normal leading-[150%];
   }
 }

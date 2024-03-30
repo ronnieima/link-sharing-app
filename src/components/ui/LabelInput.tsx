@@ -34,7 +34,7 @@ export default function LabelInput({
       control={control}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="text-body-s">{label}</FormLabel>
+          <FormLabel className="body-s">{label}</FormLabel>
           <FormControl className="peer">
             <div className="group relative aria-invalid:border-red ">
               <Input
@@ -44,7 +44,7 @@ export default function LabelInput({
                 className="group-aria-invalid:border group-aria-invalid:border-red"
                 {...field}
               />
-              <FormMessage className="text-body-s absolute right-4 top-1/2 hidden -translate-y-1/2 font-thin text-red md:block" />
+              <FormMessage className="body-s absolute right-4 top-1/2 hidden -translate-y-1/2 font-thin text-red md:block" />
             </div>
           </FormControl>
           <FormMessage className="peer-aria-invalid:text-red md:hidden" />

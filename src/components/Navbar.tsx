@@ -19,24 +19,30 @@ export default function Navbar() {
           <Button
             size={"tab"}
             variant={"tab"}
+            asChild
             className={cn("group", {
               "bg-lightPurple text-purple": path === "/customize",
             })}
           >
-            <LinkIcon
-              className={cn("group-hover:text-purple", {
-                "text-purple": path === "/customize",
-              })}
-            />
+            <Link href={"/customize"}>
+              <LinkIcon
+                className={cn("group-hover:text-purple", {
+                  "text-purple": path === "/customize",
+                })}
+              />
+            </Link>
           </Button>
           <Button
             size={"tab"}
             variant={"tab"}
+            asChild
             className={cn("group", {
               "bg-lightPurple text-purple": path === "/profile",
             })}
           >
-            <UserCircle />
+            <Link href={"/profile"}>
+              <UserCircle />
+            </Link>
           </Button>
         </div>
         <Button size={"icon"} variant={"outline"} className="w-[52px]">

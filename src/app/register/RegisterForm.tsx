@@ -36,10 +36,8 @@ export default function RegisterForm() {
         className="mx-auto space-y-10 md:w-[476px] md:rounded-lg md:bg-white md:p-10 md:shadow-sm"
       >
         <header className="space-y-2">
-          <h1 className="text-heading-m">Create account</h1>
-          <p className="text-body-m">
-            Let’s get you started sharing your links!
-          </p>
+          <h1 className="heading-m">Create account</h1>
+          <p className="body-m">Let’s get you started sharing your links!</p>
           {error && <span className="text-xs text-red">{error}</span>}
         </header>
         <div className="space-y-6">
@@ -64,14 +62,14 @@ export default function RegisterForm() {
             placeholder="At least 8 characters"
             icon="/images/icon-password.svg"
           />
-          <p className="text-body-s text-gray">
+          <p className="body-s text-gray">
             Password must contain at least 8 characters
           </p>
           <Button type="submit" variant={"default"}>
             Create new account
           </Button>
         </div>
-        <footer className="text-body-m flex w-full flex-col items-center justify-center md:flex-row md:gap-1">
+        <footer className="body-m flex w-full flex-col items-center justify-center md:flex-row md:gap-1">
           <p>Already have an account?</p>
           <Link
             className="text-purple transition-colors  hover:text-purpleHover"

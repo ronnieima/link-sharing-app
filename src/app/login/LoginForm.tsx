@@ -40,8 +40,8 @@ export default function LoginForm() {
         className="mx-auto space-y-10 md:w-[476px] md:rounded-lg md:bg-white md:p-10 md:shadow-sm"
       >
         <header className="space-y-2">
-          <h1 className="text-heading-m">Login</h1>
-          <p className="text-body-m">
+          <h1 className="heading-m">Login</h1>
+          <p className="body-m">
             Add your details below to get back into the app
           </p>
           {error && <span className="text-xs text-red">{error}</span>}
@@ -63,7 +63,7 @@ export default function LoginForm() {
           />
           <Button variant={"default"}>Login</Button>
         </div>
-        <footer className="text-body-m flex w-full flex-col items-center justify-center md:flex-row md:gap-1">
+        <footer className="body-m flex w-full flex-col items-center justify-center md:flex-row md:gap-1">
           <p>Don&apos;t have an account?</p>
           <Link
             className="text-purple transition-colors  hover:text-purpleHover"

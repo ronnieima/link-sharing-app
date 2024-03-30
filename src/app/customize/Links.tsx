@@ -13,7 +13,7 @@ export default function Links() {
       <Button
         onClick={incCounter}
         variant={"outline"}
-        className="text-heading-s  mb-8 text-purple"
+        className="heading-s  mb-8 text-purple"
       >
         + Add new link
       </Button>

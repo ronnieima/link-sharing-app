@@ -15,8 +15,8 @@ export default async function CustomizePage() {
       <section className="">
         <MaxWidthContainer className="rounded-t-lg bg-white p-6 shadow-sm lg:p-10">
           <header className="pb-10">
-            <h1 className="text-heading-m">Customize your links</h1>
-            <p className="text-body-m">
+            <h1 className="heading-m">Customize your links</h1>
+            <p className="body-m">
               Add/edit/remove links below and then share all your profiles with
               the world!
             </p>
