@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { loginUser } from "../actions";
+import { useState } from "react";
 
 const loginFormSchema = z.object({
   email: z.string({ required_error: "Can't be empty" }).email().trim().min(1),
@@ -17,6 +18,7 @@ const loginFormSchema = z.object({
 type LoginFormSchemaType = z.infer<typeof loginFormSchema>;
 
 export default function LoginForm() {
+  const [error, setError] = useState("");
   const form = useForm<LoginFormSchemaType>({
     resolver: zodResolver(loginFormSchema),
   });
@@ -25,7 +27,10 @@ export default function LoginForm() {
 
   async function onSubmit(values: LoginFormSchemaType) {
     const { email, password } = values;
-    await loginUser(email, password);
+    const res = await loginUser(email, password);
+    if (res?.error) {
+      setError(res?.error);
+    }
   }
 
   return (
@@ -39,6 +44,7 @@ export default function LoginForm() {
           <p className="text-body-m">
             Add your details below to get back into the app
           </p>
+          {error && <span className="text-xs text-red">{error}</span>}
         </header>
         <div className="space-y-6">
           <LabelInput

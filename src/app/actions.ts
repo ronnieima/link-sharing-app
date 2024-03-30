@@ -69,9 +69,7 @@ export async function loginUser(email: string, password: string) {
     // Since protecting against this is non-trivial,
     // it is crucial your implementation is protected against brute-force attacks with login throttling etc.
     // If emails/usernames are public, you may outright tell the user that the username is invalid.
-    return new Response("Invalid email or password", {
-      status: 400,
-    });
+    return { error: "Invalid email or password" };
   }
 
   const validPassword = await new Argon2id().verify(
@@ -79,9 +77,7 @@ export async function loginUser(email: string, password: string) {
     password,
   );
   if (!validPassword) {
-    return new Response("Invalid email or password", {
-      status: 400,
-    });
+    return { error: "Invalid email or password" };
   }
   const session = await lucia.createSession(user.id, {});
   const sessionCookie = lucia.createSessionCookie(session.id);
