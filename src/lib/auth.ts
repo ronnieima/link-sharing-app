@@ -9,6 +9,14 @@ import { cookies } from "next/headers";
 const adapter = new DrizzlePostgreSQLAdapter(db, sessions, users);
 
 export const lucia = new Lucia(adapter, {
+  getUserAttributes: (attributes) => {
+    return {
+      email: attributes.email,
+      emailVerified: attributes.emailVerified,
+      firstName: attributes.firstName,
+      lastName: attributes.firstName,
+    };
+  },
   sessionCookie: {
     attributes: {
       // set to `true` when using HTTPS
@@ -53,9 +61,15 @@ export const validateRequest = cache(
   },
 );
 
-// IMPORTANT!
 declare module "lucia" {
   interface Register {
     Lucia: typeof lucia;
+    DatabaseUserAttributes: DatabaseUserAttributes;
+  }
+  interface DatabaseUserAttributes {
+    email: string;
+    emailVerified: boolean;
+    firstName: string;
+    lastName: string;
   }
 }

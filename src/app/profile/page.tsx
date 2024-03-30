@@ -5,6 +5,7 @@ import React from "react";
 import ProfileForm from "./ProfileForm";
 import { Button } from "@/components/ui/button";
 import LogoutButton from "@/components/ui/LogoutButton";
+import { z } from "zod";
 
 export default async function ProfilePage() {
   const { user } = await validateRequest();
@@ -12,7 +13,7 @@ export default async function ProfilePage() {
     return redirect("/login");
   }
   return (
-    <main className="p-4 ">
+    <main className="p-4">
       <div className="flex flex-col gap-10 rounded-lg bg-white p-6">
         <header>
           <h1 className="heading-m">Profile Details</h1>
@@ -38,14 +39,10 @@ export default async function ProfilePage() {
             </div>
           </section>
           <section className="rounded-lg bg-lightGray p-5">
-            <ProfileForm />
+            <ProfileForm email={user.email} />
           </section>
         </div>
       </div>
-      <section className=" space-y-4 rounded-b-lg border-t border-border bg-white p-4">
-        <LogoutButton />
-        <Button className="m-0 p-0">Save</Button>
-      </section>
     </main>
   );
 }

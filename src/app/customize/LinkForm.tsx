@@ -1,14 +1,12 @@
 "use client";
 import { Form } from "@/components/ui/form";
 import { LinkType } from "@/lib/db/schema";
-import { DevTool } from "@hookform/devtools";
 import { useFieldArray, useForm } from "react-hook-form";
 import PreviewItem from "./PreviewItem";
 import { toast } from "react-toastify";
 import EmptyLinks from "./EmptyLinks";
 import { updateLinks } from "@/actions/link";
 import { Button } from "@/components/ui/button";
-import { useEffect } from "react";
 const MAX_LINKS_AMOUNT = 5;
 type Props = {
   links?: LinkType[];
@@ -17,7 +15,7 @@ type Props = {
 
 export default function LinkForm({ links, userId }: Props) {
   const defaultLinks =
-    Object.entries(links).flatMap((link) => ({
+    Object.entries(links!).flatMap((link) => ({
       platform: link[1].platform,
       url: link[1].url,
     })) || [];
