@@ -1,24 +1,45 @@
 "use server";
 import { lucia } from "@/lib/auth";
-import { generateId } from "lucia";
-import { users } from "@/lib/db/schema";
-import { Argon2id } from "oslo/password";
-import { eq } from "drizzle-orm";
 import db from "@/lib/db";
+import { users } from "@/lib/db/schema";
+import { loginFormSchema } from "@/lib/zod";
+import { NeonDbError } from "@neondatabase/serverless";
+import { eq } from "drizzle-orm";
+import { generateId } from "lucia";
 import { cookies } from "next/headers";
+import { Argon2id } from "oslo/password";
 
 export async function registerUser(email: string, password: string) {
+  const result = loginFormSchema.safeParse({ email, password });
+
+  if (!result.success) {
+    return { error: "Invalid email or password" };
+  }
+
   const hashedPassword = await new Argon2id().hash(password);
   const userId = generateId(15);
-  console.log(userId);
-  await db.insert(users).values({
-    id: userId,
-    email,
-    hashedPassword,
-  });
-  const session = await lucia.createSession(userId, {});
-  const sessionCookie = lucia.createSessionCookie(session.id);
-  cookies().set(sessionCookie);
+  try {
+    await db.insert(users).values({
+      id: userId,
+      email,
+      hashedPassword,
+    });
+    const session = await lucia.createSession(userId, {});
+    const sessionCookie = lucia.createSessionCookie(session.id);
+    cookies().set(sessionCookie);
+  } catch (error) {
+    if (error instanceof NeonDbError) {
+      switch (error.code) {
+        case "23505":
+          return { error: "Email already registered" };
+        default:
+          return {
+            error: "Database error: Failed to create new account.",
+          };
+      }
+    }
+    return { error: "Failed to create new account." };
+  }
 }
 
 export async function loginUser(email: string, password: string) {

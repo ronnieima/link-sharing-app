@@ -6,39 +6,33 @@ import LabelInput from "@/components/ui/LabelInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { registerUser } from "../actions";
-
-const registerFormSchema = z
-  .object({
-    email: z.string({ required_error: "Can't be empty" }).email().trim().min(1),
-    password: z
-      .string({ required_error: "Please check again" })
-      .min(8, "At least 8 characters"),
-    confirm: z
-      .string({ required_error: "Please check again" })
-      .min(8, "At least 8 characters"),
-  })
-  .refine((values) => values.password === values.confirm, {
-    message: "Passwords must match",
-    path: ["confirm"],
-  });
-
-type RegisterFormSchemaType = z.infer<typeof registerFormSchema>;
+import { registerFormSchema, RegisterFormSchemaType } from "@/lib/zod";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
+  const router = useRouter();
+  const [error, setError] = useState("");
   const form = useForm<RegisterFormSchemaType>({
     resolver: zodResolver(registerFormSchema),
   });
 
   const { handleSubmit } = form;
 
+  async function onSubmit(values: RegisterFormSchemaType) {
+    const res = await registerUser(values.email, values.password);
+    if (res?.error) {
+      setError(res?.error);
+    } else {
+      router.push("/");
+    }
+  }
+
   return (
     <Form {...form}>
       <form
-        onSubmit={handleSubmit(async (values) => {
-          await registerUser(values.email, values.password);
-        })}
+        onSubmit={handleSubmit(onSubmit)}
         className="mx-auto space-y-10 md:w-[476px] md:rounded-lg md:bg-white md:p-10 md:shadow-sm"
       >
         <header className="space-y-2">
@@ -46,6 +40,7 @@ export default function RegisterForm() {
           <p className="text-body-m">
             Let’s get you started sharing your links!
           </p>
+          {error && <span className="text-xs text-red">{error}</span>}
         </header>
         <div className="space-y-6">
           <LabelInput
