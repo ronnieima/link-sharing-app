@@ -26,10 +26,17 @@ export default async function CustomizePage() {
             the world!
           </p>
           <span>User id: {user.id}</span>
+          {links.error && (
+            <span className="text-xs text-red">{links.error}</span>
+          )}
         </header>
 
         <AddNewLinkButton userId={user.id} />
-        {links.length === 0 ? <EmptyLinks /> : <LinkForm links={links} />}
+        {!links.data || links.data.length === 0 ? (
+          <EmptyLinks />
+        ) : (
+          <LinkForm links={links.data} />
+        )}
       </MaxWidthContainer>
       <section className="rounded-b-lg border-t border-border bg-white p-4">
         <Button className="m-0 p-0">Save</Button>

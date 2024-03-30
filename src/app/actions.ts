@@ -1,7 +1,7 @@
 "use server";
 import { lucia, validateRequest } from "@/lib/auth";
 import db from "@/lib/db";
-import { links, users } from "@/lib/db/schema";
+import { links, LinkType, users } from "@/lib/db/schema";
 import { loginFormSchema } from "@/lib/zod";
 import { NeonDbError } from "@neondatabase/serverless";
 import { eq, sql } from "drizzle-orm";
@@ -144,7 +144,7 @@ export async function getLinks(userId: string) {
       ORDER BY ${links.createdAt}
     `);
 
-    return userLinks.rows;
+    return { data: userLinks.rows as LinkType[] };
   } catch (error) {
     return { error: "Unknown error ooccured" };
   }
