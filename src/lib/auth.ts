@@ -15,6 +15,7 @@ export const lucia = new Lucia(adapter, {
       emailVerified: attributes.emailVerified,
       firstName: attributes.firstName,
       lastName: attributes.lastName,
+      profilePictureUrl: attributes.profilePictureUrl,
     };
   },
   sessionCookie: {
@@ -71,5 +72,6 @@ declare module "lucia" {
     emailVerified: boolean;
     firstName: string;
     lastName: string;
+    profilePictureUrl: string;
   }
 }

@@ -8,6 +8,7 @@ export const users = pgTable("user", {
   email: text("email").unique().notNull(),
   emailVerified: boolean("emailVerified").default(false),
   hashedPassword: text("hashedPassword").notNull(),
+  profilePictureUrl: text("profilePictureUrl"),
 });
 
 export const sessions = pgTable("session", {

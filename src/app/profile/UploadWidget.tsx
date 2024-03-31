@@ -1,22 +1,17 @@
 "use client";
+import { addProfilePictureUrl } from "@/actions/profile";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { CldUploadWidget, getCldImageUrl } from "next-cloudinary";
-import React from "react";
+import { User } from "lucia";
+import { ImageIcon } from "lucide-react";
+import { CldUploadWidget } from "next-cloudinary";
 import { toast } from "react-toastify";
 
 type Props = {
-  userId: string;
+  user: User;
 };
 
-export default function UploadWidget({ userId }: Props) {
-  const url = getCldImageUrl({
-    width: 200,
-    height: 200,
-    src: `devlinks/${userId}`,
-    defaultImage: "no-image.jpg",
-  });
-
+export default function UploadWidget({ user }: Props) {
   return (
     <CldUploadWidget
       signatureEndpoint="/api/sign-cloudinary-params"
@@ -24,9 +19,13 @@ export default function UploadWidget({ userId }: Props) {
         maxFiles: 1,
         multiple: false,
         sources: ["local", "url"],
-        publicId: userId,
+        publicId: user?.id,
+        maxImageHeight: 1024,
+        maxImageWidth: 1024,
       }}
-      onSuccess={() => {
+      onSuccess={(results) => {
+        //@ts-ignore
+        addProfilePictureUrl(user?.id, results.info.url);
         toast(`Image uploaded successfully!`, {
           type: "success",
         });
@@ -35,29 +34,31 @@ export default function UploadWidget({ userId }: Props) {
       {({ open }) => {
         return (
           <div
+            onClick={() => open()}
+            className={cn(
+              `flex aspect-square h-[193px] flex-col items-center justify-center space-y-2 rounded-lg bg-lightPurple hover:cursor-pointer`,
+            )}
             style={
-              url
+              user?.profilePictureUrl
                 ? {
-                    backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${url})`,
+                    backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ),url(${user?.profilePictureUrl})`,
                     backgroundSize: `cover`,
                   }
                 : {}
             }
-            className={cn(
-              `flex aspect-square h-[193px] flex-col items-center justify-center rounded-lg bg-lightPurple`,
-            )}
           >
-            <img src="images/icon-upload-image.svg" alt="upload image" />
-            <Button variant={"link"} onClick={() => open()}>
-              <p
-                className={cn("heading-s text-purple", {
-                  "text-white": url,
-                })}
-              >
-                {" "}
-                Upload Image
-              </p>
-            </Button>
+            <ImageIcon
+              className={cn("w-16", {
+                "text-white": user?.profilePictureUrl,
+              })}
+            />
+            <p
+              className={cn("heading-s text-purple", {
+                "text-white ": user?.profilePictureUrl,
+              })}
+            >
+              {user?.profilePictureUrl ? "Change Image" : "Upload Image"}
+            </p>
           </div>
         );
       }}

@@ -20,3 +20,17 @@ export async function updateProfile(
     return { error: `Error: ${error}` };
   }
 }
+
+export async function addProfilePictureUrl(userId: string, imageUrl: string) {
+  if (!userId) return;
+
+  try {
+    await db
+      .update(users)
+      .set({ profilePictureUrl: imageUrl })
+      .where(eq(users.id, userId));
+    return { message: `Success` };
+  } catch (error) {
+    return { error: `Error: ${error}` };
+  }
+}

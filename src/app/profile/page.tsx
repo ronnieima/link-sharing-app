@@ -1,12 +1,8 @@
-import MaxWidthContainer from "@/components/MaxWidthContainer";
 import { validateRequest } from "@/lib/auth";
-import { redirect } from "next/navigation";
-import React from "react";
-import ProfileForm from "./ProfileForm";
-import { Button } from "@/components/ui/button";
-import LogoutButton from "@/components/ui/LogoutButton";
-import Preview from "../customize/Preview";
 import { cn } from "@/lib/utils";
+import { redirect } from "next/navigation";
+import Preview from "../customize/Preview";
+import ProfileForm from "./ProfileForm";
 import UploadWidget from "./UploadWidget";
 
 export default async function ProfilePage() {
@@ -42,7 +38,7 @@ export default async function ProfilePage() {
                   <p className="heading-s text-purple">+ Upload Image</p>
                 </Button>
               </div> */}
-              <UploadWidget userId={user.id} />
+              <UploadWidget user={user} />
               <p className="body-s text-gray ">
                 Image must be below 1024x1024px. Use PNG or JPG format.
               </p>
