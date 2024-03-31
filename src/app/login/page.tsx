@@ -10,8 +10,8 @@ export default async function LoginPage() {
     return redirect("/");
   }
   return (
-    <main className="bg-lightGray ">
-      <MaxWidthContainer className="flex items-center justify-center">
+    <main className=" bg-lightGray">
+      <MaxWidthContainer className="flex items-center  justify-center md:min-h-svh">
         <section className="flex flex-col items-center justify-center gap-16 py-8 ">
           <div className="relative h-[40px] w-[182.5px] md:self-center">
             <Image

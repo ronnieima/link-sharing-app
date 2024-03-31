@@ -10,6 +10,7 @@ import {
 } from "./form";
 import { Input } from "./input";
 import { Label } from "./label";
+import { cn } from "@/lib/utils";
 
 type Props = {
   label: string;
@@ -18,6 +19,7 @@ type Props = {
   placeholder: string;
   icon?: string;
   defaultValue?: string;
+  halfOnTablet?: boolean;
 };
 
 export default function LabelInput({
@@ -26,6 +28,7 @@ export default function LabelInput({
   type,
   placeholder,
   icon,
+  halfOnTablet = false,
 }: Props) {
   const { control } = useFormContext();
 
@@ -34,9 +37,14 @@ export default function LabelInput({
       name={value}
       control={control}
       render={({ field }) => (
-        <FormItem className="md:flex md:flex-row md:items-center md:justify-between">
+        <FormItem
+          className={cn({
+            "md:flex md:flex-row md:items-center md:justify-between":
+              halfOnTablet,
+          })}
+        >
           <FormLabel className="body-s">{label}</FormLabel>
-          <FormControl className="peer md:w-1/2">
+          <FormControl className={cn("peer", { "md:w-1/2": halfOnTablet })}>
             <div className="group relative aria-invalid:border-red ">
               <Input
                 icon={icon}
