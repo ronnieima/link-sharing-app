@@ -18,7 +18,7 @@ export default async function ProfilePage() {
         "lg:flex  lg:items-stretch lg:justify-center lg:gap-6 lg:pt-0",
       )}
     >
-      <Preview />
+      <Preview user={user} />
       <div className="relative flex flex-col gap-10 rounded-lg bg-white p-6 md:h-[779px] md:p-10">
         <header>
           <h1 className="heading-m">Profile Details</h1>
