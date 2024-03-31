@@ -23,7 +23,7 @@ export default async function ProfilePage() {
       )}
     >
       <Preview user={user} links={links.data} />
-      <div className="relative flex flex-col gap-10 rounded-lg bg-white p-6 md:h-[779px] md:p-10">
+      <div className="relative rounded-lg bg-white p-6 shadow-sm lg:w-2/3 lg:p-10">
         <header>
           <h1 className="heading-m">Profile Details</h1>
           <p className="body-m text-gray">
