@@ -2,7 +2,7 @@
 import { Form } from "@/components/ui/form";
 import { LinkType } from "@/lib/db/schema";
 import { useFieldArray, useForm } from "react-hook-form";
-import PreviewItem from "./PreviewItem";
+import LinkItem from "./LinkItem";
 import { toast } from "react-toastify";
 import EmptyLinks from "./EmptyLinks";
 import { updateLinks } from "@/actions/link";
@@ -77,7 +77,7 @@ export default function LinkForm({ links, userId }: Props) {
           <ul className="pb-64">
             {fields.map((field, index) => {
               return (
-                <PreviewItem
+                <LinkItem
                   key={field.id}
                   link={field}
                   index={index}

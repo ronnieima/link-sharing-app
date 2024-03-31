@@ -27,18 +27,21 @@ export const platforms = {
     value: "github",
     link: "github.com",
     icon: "/images/icon-github.svg",
+    color: "#1A1A1A",
   },
   youtube: {
     platform: "Youtube",
     value: "youtube",
     link: "youtube.com",
     icon: "/images/icon-youtube.svg",
+    color: "#EE3939",
   },
   linkedin: {
     platform: "LinkedIn",
     value: "linkedin",
     link: "linkedin.com",
     icon: "/images/icon-linkedin.svg",
+    color: "#2D68FF",
   },
 };
 

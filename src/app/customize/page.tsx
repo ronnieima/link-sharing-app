@@ -21,7 +21,7 @@ export default async function CustomizePage() {
         "lg:flex  lg:items-stretch lg:justify-center lg:gap-6 lg:pt-0",
       )}
     >
-      <Preview user={user} />
+      <Preview user={user} links={links.data} />
       <div className="relative rounded-lg bg-white p-6 shadow-sm lg:w-2/3 lg:p-10">
         <header className="pb-10">
           <h1 className="heading-m">Customize your links</h1>
