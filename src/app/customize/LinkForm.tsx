@@ -27,7 +27,7 @@ export default function LinkForm({ links, userId }: Props) {
   const {
     control,
     handleSubmit,
-    formState: { isDirty, isSubmitSuccessful },
+    formState: { isDirty, isSubmitting },
     reset,
   } = form;
   const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
@@ -54,7 +54,7 @@ export default function LinkForm({ links, userId }: Props) {
     <Form {...form}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-8 rounded-lg  p-5 text-center"
+        className="flex flex-col gap-8  rounded-lg  p-5 text-center lg:p-0"
       >
         <Button
           variant={"outline"}
@@ -74,7 +74,7 @@ export default function LinkForm({ links, userId }: Props) {
         {fields.length === 0 ? (
           <EmptyLinks />
         ) : (
-          <ul>
+          <ul className="pb-64">
             {fields.map((field, index) => {
               return (
                 <PreviewItem
@@ -88,8 +88,12 @@ export default function LinkForm({ links, userId }: Props) {
             {/* <DevTool control={form.control} /> */}
           </ul>
         )}
-        <section className="rounded-b-lg border-t border-border bg-white p-4">
-          <Button type="submit" className="m-0 p-0" disabled={!isDirty}>
+        <section className="flex w-full flex-col items-center gap-4 rounded-b-lg border-t border-border bg-white p-4 md:absolute md:bottom-0 md:right-0 md:flex-row md:justify-end md:p-6">
+          <Button
+            type="submit"
+            disabled={!isDirty || isSubmitting}
+            className="m-0 p-0 md:w-[91px]"
+          >
             Save
           </Button>
         </section>

@@ -19,12 +19,12 @@ export default function Navbar() {
           />
           <LogoSmall className="md:hidden" />
         </Link>
-        <div className="flex w-1/2 justify-center md:justify-between ">
+        <div className="flex w-1/2 justify-center gap-4  ">
           <Button
             size={"tab"}
             variant={"tab"}
             asChild
-            className={cn("group", {
+            className={cn("group max-w-[122px]", {
               "bg-lightPurple text-purple": path === "/customize",
             })}
           >
@@ -41,11 +41,11 @@ export default function Navbar() {
             size={"tab"}
             variant={"tab"}
             asChild
-            className={cn("group", {
+            className={cn("group max-w-[187px]", {
               "space-x-2 bg-lightPurple text-purple": path === "/profile",
             })}
           >
-            <Link href={"/profile"}>
+            <Link href={"/profile"} className="space-x-2">
               <UserCircle />
               <span className="heading-s hidden md:block">Profile Details</span>
             </Link>
