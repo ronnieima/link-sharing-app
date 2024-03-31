@@ -10,7 +10,6 @@ export default async function CustomizePage() {
   if (!user) {
     return redirect("/login");
   }
-
   const links = await getLinks(user.id);
 
   return (

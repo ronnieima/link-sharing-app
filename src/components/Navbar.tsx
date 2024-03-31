@@ -54,10 +54,13 @@ export default function Navbar() {
         <Button
           size={"icon"}
           variant={"outline"}
+          asChild
           className="w-[52px] md:w-[114px]"
         >
-          <span className="hidden md:block">Preview</span>
-          <Preview className="md:hidden" />
+          <Link href={"/preview"}>
+            <span className="hidden md:block">Preview</span>
+            <Preview className="md:hidden" />
+          </Link>
         </Button>
       </section>
     </nav>

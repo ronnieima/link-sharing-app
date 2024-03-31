@@ -13,7 +13,6 @@ import {
   UseFieldArrayRemove,
   useFormContext,
 } from "react-hook-form";
-import { PlatformKeys, platforms } from "../../stores/useLinkStore";
 
 import { Input } from "@/components/ui/input";
 import {
@@ -24,6 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useEffect, useState } from "react";
+import { platforms, PlatformKeys } from "@/stores/useLinkStore";
 type Props = {
   link: FieldArrayWithId<
     {

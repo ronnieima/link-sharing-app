@@ -20,7 +20,6 @@ export default function RootLayout({
     <html lang="en" className="bg-lightGray">
       <body className={instrumentSans.className}>
         <ToastProvider />
-        <Navbar />
         {children}
       </body>
     </html>
