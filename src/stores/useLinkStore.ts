@@ -1,71 +1,56 @@
 import { create } from "zustand";
 
-// export const platforms: Platform[] = [
-//   {
-//     platform: "GitHub",
-//     value: "github",
-//     link: "https://www.github.com/",
-//     icon: "/images/icon-github.svg",
-//   },
-//   {
-//     platform: "Youtube",
-//     value: "youtube",
-//     link: "https://www.youtube.com/",
-//     icon: "/images/icon-youtube.svg",
-//   },
-//   {
-//     platform: "LinkedIn",
-//     value: "linkedin",
-//     link: "https://www.linkedin.com/",
-//     icon: "/images/icon-linkedin.svg",
-//   },
-// ];
-
-export const platforms = {
-  github: {
-    platform: "GitHub",
-    value: "github",
-    link: "github.com",
-    icon: "/images/icon-github.svg",
-    color: "#1A1A1A",
-  },
-  youtube: {
-    platform: "Youtube",
-    value: "youtube",
-    link: "youtube.com",
-    icon: "/images/icon-youtube.svg",
-    color: "#EE3939",
-  },
-  linkedin: {
-    platform: "LinkedIn",
-    value: "linkedin",
-    link: "linkedin.com",
-    icon: "/images/icon-linkedin.svg",
-    color: "#2D68FF",
-  },
-};
-
 export type Platform = {
-  platform: string;
-  value: string;
-  link: string;
-  icon: string;
+  github: {
+    platform: string;
+    value: string;
+    link: string;
+    icon: string;
+    color: string;
+  };
+  youtube: {
+    platform: string;
+    value: string;
+    link: string;
+    icon: string;
+    color: string;
+  };
+  linkedin: {
+    platform: string;
+    value: string;
+    link: string;
+    icon: string;
+    color: string;
+  };
 };
 export type PlatformKeys = "github" | "youtube" | "linkedin";
 
 type LinkState = {
-  counter: number;
-  links: number[];
-  incCounter: () => void;
-  removeLink: (index: number) => void;
+  platforms: Platform;
 };
 
 export const useLinkStore = create<LinkState>()((set) => ({
-  counter: 0,
-  links: [],
-  incCounter: () =>
-    set((state) => ({
-      counter: state.counter + 1,
-    })),
-  removeLink: (index) => set((state) => ({ counter: state.counter - 1 })),
+  platforms: {
+    github: {
+      platform: "GitHub",
+      value: "github",
+      link: "github.com",
+      icon: "/images/icon-github.svg",
+      color: "#1A1A1A",
+    },
+    youtube: {
+      platform: "Youtube",
+      value: "youtube",
+      link: "youtube.com",
+      icon: "/images/icon-youtube.svg",
+      color: "#EE3939",
+    },
+    linkedin: {
+      platform: "LinkedIn",
+      value: "linkedin",
+      link: "linkedin.com",
+      icon: "LinkedInIcon,",
+      color: "#2D68FF",
+    },
+  },
 }));

@@ -7,11 +7,36 @@ import { toast } from "react-toastify";
 import EmptyLinks from "./EmptyLinks";
 import { updateLinks } from "@/actions/link";
 import { Button } from "@/components/ui/button";
+import { Github, LinkedinIcon, Youtube } from "lucide-react";
 const MAX_LINKS_AMOUNT = 5;
 type Props = {
   links?: LinkType[];
   userId: string;
 };
+
+export const platforms = [
+  {
+    platform: "GitHub",
+    value: "github",
+    link: "github.com",
+    icon: <Github />,
+    color: "#1A1A1A",
+  },
+  {
+    platform: "Youtube",
+    value: "youtube",
+    link: "youtube.com",
+    icon: <Youtube />,
+    color: "#EE3939",
+  },
+  {
+    platform: "LinkedIn",
+    value: "linkedin",
+    link: "linkedin.com",
+    icon: <LinkedinIcon />,
+    color: "#2D68FF",
+  },
+];
 
 export default function LinkForm({ links, userId }: Props) {
   const defaultLinks =

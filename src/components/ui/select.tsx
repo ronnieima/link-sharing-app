@@ -113,7 +113,7 @@ SelectLabel.displayName = SelectPrimitive.Label.displayName;
 
 interface SelectItemProps
   extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item> {
-  icon?: string; // Define the icon prop
+  icon?: React.ReactNode; // Define the icon prop
 }
 
 const SelectItem = React.forwardRef<
@@ -129,7 +129,7 @@ const SelectItem = React.forwardRef<
     {...props}
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-      <img src={icon} alt="logo" />
+      {icon}
     </span>
 
     <SelectPrimitive.ItemText className="flex">

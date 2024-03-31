@@ -36,12 +36,6 @@ export default async function ProfilePage() {
               <h2 className="body-m text-gray">Profile Picture</h2>
             </header>
             <div className="md:flex md:w-1/2 md:items-center md:gap-6">
-              {/* <div className="flex aspect-square h-[193px] flex-col items-center justify-center rounded-lg bg-lightPurple ">
-                <img src="images/icon-upload-image.svg" alt="upload image" />
-                <Button variant={"link"}>
-                  <p className="heading-s text-purple">+ Upload Image</p>
-                </Button>
-              </div> */}
               <UploadWidget user={user} />
               <p className="body-s text-gray ">
                 Image must be below 1024x1024px. Use PNG or JPG format.

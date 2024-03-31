@@ -22,8 +22,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useEffect, useState } from "react";
-import { platforms, PlatformKeys } from "@/stores/useLinkStore";
+import { cloneElement, useEffect, useState } from "react";
+import { platforms } from "./LinkForm";
 type Props = {
   link: FieldArrayWithId<
     {
@@ -47,9 +47,11 @@ export default function LinkItem({ link, index, remove }: Props) {
   useEffect(() => {
     setCurrentPlatform(selectedPlatform);
   }, [selectedPlatform, index, setValue]);
-  const selectPlatformObj = platforms[currentPlatform as PlatformKeys];
+  const selectPlatformObj = platforms.find(
+    (platformMeta) => platformMeta.value === currentPlatform,
+  );
 
-  const rootDomain = selectPlatformObj.link;
+  const rootDomain = selectPlatformObj?.link || "";
   const regexPattern = `^(https?:\\/\\/)?(www\\.)?${rootDomain.replace(/\./g, "\\.")}\\/.+$`;
   const regex = new RegExp(regexPattern);
 
@@ -88,20 +90,23 @@ export default function LinkItem({ link, index, remove }: Props) {
               >
                 <SelectTrigger>
                   <div className="flex items-center gap-2">
-                    <img src={selectPlatformObj?.icon} alt="logo" />
+                    {cloneElement(selectPlatformObj?.icon!, {
+                      className: "size-4",
+                    })}
                     <SelectValue className="text-left" />
                   </div>
                 </SelectTrigger>
                 <SelectContent>
-                  {Object.keys(platforms).map((platform) => {
-                    const platformObj = platforms[platform as PlatformKeys];
+                  {platforms.map((platform) => {
                     return (
                       <SelectItem
-                        value={platform}
-                        key={platform}
-                        icon={platformObj?.icon}
+                        value={platform.value}
+                        key={platform.value}
+                        icon={cloneElement(platform?.icon, {
+                          className: "size-4",
+                        })}
                       >
-                        <span>{platformObj.platform}</span>
+                        <span>{platform?.platform}</span>
                       </SelectItem>
                     );
                   })}
