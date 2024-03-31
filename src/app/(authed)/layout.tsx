@@ -1,17 +1,14 @@
-import Navbar from "@/components/Navbar";
-import { validateRequest } from "@/lib/auth";
-import { redirect } from "next/navigation";
-import { cloneElement } from "react";
+import AuthedNavbar from "./_components/AuthedNavbar";
 
-export default async function DashboardLayout({
+export default async function AuthedLayout({
   children,
 }: {
   children: React.ReactElement;
 }) {
   return (
-    <main>
-      <Navbar />
+    <section>
+      <AuthedNavbar />
       {children}
-    </main>
+    </section>
   );
 }
