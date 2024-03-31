@@ -24,7 +24,7 @@ export default async function ProfilePage() {
     >
       <Preview user={user} links={links.data} />
       <div className="relative rounded-lg bg-white p-6 shadow-sm lg:w-2/3 lg:p-10">
-        <header>
+        <header className="pb-10">
           <h1 className="heading-m">Profile Details</h1>
           <p className="body-m text-gray">
             Add your details to create a personal touch to your profile.
@@ -35,7 +35,7 @@ export default async function ProfilePage() {
             <header>
               <h2 className="body-m text-gray">Profile Picture</h2>
             </header>
-            <div className="md:flex md:w-1/2 md:items-center md:gap-6">
+            <div className="space-y-4 md:flex md:w-1/2 md:items-center md:gap-6">
               <UploadWidget user={user} />
               <p className="body-s text-gray ">
                 Image must be below 1024x1024px. Use PNG or JPG format.

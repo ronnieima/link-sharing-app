@@ -99,7 +99,7 @@ export default function LinkForm({ links, userId }: Props) {
         {fields.length === 0 ? (
           <EmptyLinks />
         ) : (
-          <ul className="pb-64">
+          <ul className="space-y-6 pb-16">
             {fields.map((field, index) => {
               return (
                 <LinkItem
@@ -113,7 +113,7 @@ export default function LinkForm({ links, userId }: Props) {
             {/* <DevTool control={form.control} /> */}
           </ul>
         )}
-        <section className="flex w-full flex-col items-center gap-4 rounded-b-lg border-t border-border bg-white p-4 md:absolute md:bottom-0 md:right-0 md:flex-row md:justify-end md:p-6">
+        <section className="md: flex w-full flex-col items-center gap-4 rounded-b-lg border-t border-border bg-white p-4 md:bottom-0 md:right-0 md:flex-row md:justify-end md:p-6">
           <Button
             type="submit"
             disabled={!isDirty || isSubmitting}

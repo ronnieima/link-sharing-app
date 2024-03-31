@@ -59,7 +59,8 @@ export default function LinkItem({ link, index, remove }: Props) {
     <div className="flex w-full flex-col  gap-3 rounded-lg bg-lightGray p-5  text-center">
       <div className="flex justify-between">
         <div className="flex items-center gap-2">
-          <Grip size={16} /> <p>Link #{index + 1}</p>
+          <Grip size={16} />{" "}
+          <p className="heading-s text-gray">Link #{index + 1}</p>
         </div>
         <Button
           variant={"link"}

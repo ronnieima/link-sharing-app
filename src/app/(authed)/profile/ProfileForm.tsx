@@ -55,27 +55,30 @@ export default function ProfileForm({ user }: Props) {
         id="profileForm"
         className="space-y-3"
       >
-        <section className="rounded-lg bg-lightGray p-5">
+        <section className="space-y-3 rounded-lg bg-lightGray p-5">
           <LabelInput
             label="First name*"
             placeholder="Enter first name"
             value="firstName"
             type="text"
+            halfOnTablet
           />
           <LabelInput
             label="Last name*"
             placeholder="Enter last name"
             value="lastName"
             type="text"
+            halfOnTablet
           />
           <LabelInput
             label="Email"
             placeholder="Enter email"
             value="email"
             type="email"
+            halfOnTablet
           />
         </section>
-        <section className="flex w-full flex-col items-center gap-4 rounded-b-lg border-t border-border bg-white p-4 md:absolute md:bottom-0 md:right-0 md:flex-row md:justify-end md:p-6">
+        <section className="flex w-full flex-col items-center gap-4 rounded-b-lg border-t border-border bg-white p-4  md:bottom-0 md:right-0 md:flex-row md:justify-end md:p-6">
           <LogoutButton />
           <Button
             type="submit"
