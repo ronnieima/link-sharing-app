@@ -3,7 +3,7 @@ import { Instrument_Sans } from "next/font/google";
 import "./globals.css";
 import ToastProvider from "@/components/ToastProvider";
 
-const instrumentSans = Instrument_Sans({ subsets: ["latin"] });
+const instrumentSans = Instrument_Sans({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   title: "devlinks | Link-sharing for developers",
