@@ -12,21 +12,29 @@ export default function LinkInfo({ user, links }: Props) {
 
   return (
     <>
-      {user?.profilePictureUrl && (
+      {user?.profilePictureUrl ? (
         <img
           src={user?.profilePictureUrl}
           alt="profile picture"
           className=" size-[96px]  rounded-full border-4 border-purple"
         />
+      ) : (
+        <section className=" size-[94px] h-40 flex-grow rounded-full opacity-0"></section>
       )}
-      <header className="flex w-full flex-col items-center gap-2 bg-white pb-4">
-        {fullName && (
-          <h2 className={cn("heading-s ", "w-full text-center")}>{fullName}</h2>
+      <header className="flex w-full flex-col items-center gap-2  bg-white pb-4">
+        {user?.firstName && user.lastName ? (
+          <h2 className={cn("heading-s bg-white", "w-full text-center")}>
+            {fullName}
+          </h2>
+        ) : (
+          <h2 className={cn("heading-s opacity-0", "w-full text-center")}>
+            {"No name"}
+          </h2>
         )}
         {user?.email && (
           <Link
             href={`mailto:${user.email}`}
-            className={cn("body-s w-full text-center  text-gray")}
+            className={cn("body-s w-full bg-white text-center  text-gray")}
           >
             {user?.email}
           </Link>

@@ -9,6 +9,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { useState } from "react";
 import { loginUser } from "@/actions/auth";
+import { Info, TestTubeDiagonal } from "lucide-react";
+import DemoInfoPopover from "./DemoInfoPopover";
 
 const loginFormSchema = z.object({
   email: z.string({ required_error: "Can't be empty" }).email().trim().min(1),
@@ -40,7 +42,10 @@ export default function LoginForm() {
         className="mx-auto space-y-10 md:w-[476px] md:rounded-lg md:bg-white md:p-10 md:shadow-sm"
       >
         <header className="space-y-2">
-          <h1 className="heading-m">Login</h1>
+          <div className="flex w-full items-center justify-between">
+            <h1 className="heading-m">Login</h1>
+            <DemoInfoPopover />
+          </div>
           <p className="body-m">
             Add your details below to get back into the app
           </p>
