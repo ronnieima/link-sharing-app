@@ -84,6 +84,7 @@ export default function ProfileForm({ user }: Props) {
       <section className="absolute bottom-0 right-0 flex w-full flex-col items-center gap-4 rounded-b-lg border-t border-border  px-6 py-4 md:flex-row md:justify-end lg:px-10 ">
         <LogoutButton />
         <Button
+          form="profileForm"
           type="submit"
           disabled={!isDirty || isSubmitting}
           className="m-0 p-0 md:w-[91px]"
