@@ -52,7 +52,8 @@ export default function LinkItem({ link, index, remove }: Props) {
   );
 
   const rootDomain = selectPlatformObj?.link || "";
-  const regexPattern = `^(https?:\\/\\/)?(www\\.)?${rootDomain.replace(/\./g, "\\.")}\\/.+$`;
+  const regexPattern = `^https://www\\.${rootDomain.replace(/\./g, "\\.")}\\/.+$`;
+
   const regex = new RegExp(regexPattern);
 
   return (

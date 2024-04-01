@@ -8,6 +8,7 @@ import EmptyLinks from "./EmptyLinks";
 import { updateLinks } from "@/actions/link";
 import { Button } from "@/components/ui/button";
 import { Github, LinkedinIcon, Youtube } from "lucide-react";
+import { cn } from "@/lib/utils";
 const MAX_LINKS_AMOUNT = 5;
 type Props = {
   links?: LinkType[];
@@ -76,53 +77,61 @@ export default function LinkForm({ links, userId }: Props) {
   }
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-8  rounded-lg  p-5 text-center lg:p-0"
-      >
-        <Button
-          variant={"outline"}
-          onClick={(e) => {
-            e.preventDefault();
-            if (fields.length < MAX_LINKS_AMOUNT) {
-              append({ platform: "github", url: "" });
-            } else if (fields.length >= MAX_LINKS_AMOUNT) {
-              toast(`Maximum number of links reached (${MAX_LINKS_AMOUNT})`, {
-                type: "error",
-              });
-            }
-          }}
+    <>
+      <Form {...form}>
+        <form
+          id="linkForm"
+          onSubmit={handleSubmit(onSubmit)}
+          className={cn(
+            "h-full gap-8 rounded-lg py-8  text-center ",
+            "grid grid-rows-[40px_1fr] ",
+          )}
         >
-          + Add new link
-        </Button>
-        {fields.length === 0 ? (
-          <EmptyLinks />
-        ) : (
-          <ul className="space-y-6 pb-16">
-            {fields.map((field, index) => {
-              return (
-                <LinkItem
-                  key={field.id}
-                  link={field}
-                  index={index}
-                  remove={remove}
-                />
-              );
-            })}
-            {/* <DevTool control={form.control} /> */}
-          </ul>
-        )}
-        <section className="md: flex w-full flex-col items-center gap-4 rounded-b-lg border-t border-border bg-white p-4 md:bottom-0 md:right-0 md:flex-row md:justify-end md:p-6">
           <Button
-            type="submit"
-            disabled={!isDirty || isSubmitting}
-            className="m-0 p-0 md:w-[91px]"
+            variant={"outline"}
+            onClick={(e) => {
+              e.preventDefault();
+              if (fields.length < MAX_LINKS_AMOUNT) {
+                append({ platform: "github", url: "" });
+              } else if (fields.length >= MAX_LINKS_AMOUNT) {
+                toast(`Maximum number of links reached (${MAX_LINKS_AMOUNT})`, {
+                  type: "error",
+                });
+              }
+            }}
           >
-            Save
+            + Add new link
           </Button>
-        </section>
-      </form>
-    </Form>
+          <ul className=" h-[calc(100%-100px)] space-y-6 overflow-y-auto">
+            {fields.length === 0 ? (
+              <EmptyLinks />
+            ) : (
+              <>
+                {fields.map((field, index) => {
+                  return (
+                    <LinkItem
+                      key={field.id}
+                      link={field}
+                      index={index}
+                      remove={remove}
+                    />
+                  );
+                })}
+              </>
+            )}
+          </ul>
+        </form>
+      </Form>
+      <section className="absolute bottom-0 right-0 flex w-full flex-col items-center gap-4 rounded-b-lg border-t border-border  px-6 py-4 md:flex-row md:justify-end lg:px-10 ">
+        <Button
+          form="linkForm"
+          type="submit"
+          disabled={!isDirty || isSubmitting}
+          className="m-0 p-0 md:w-[91px]"
+        >
+          Save
+        </Button>
+      </section>
+    </>
   );
 }
