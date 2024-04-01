@@ -4,7 +4,7 @@ import Preview from "./customize/_components/Preview";
 import { getLinks } from "@/actions/link";
 import { validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import CardContainer from "./_components/CardContainer";
+import { Card } from "@/components/ui/card";
 
 export default async function AuthedLayout({
   children,
@@ -28,7 +28,7 @@ export default async function AuthedLayout({
         )}
       >
         <Preview user={user} links={links.data} />
-        <CardContainer>{children}</CardContainer>
+        <Card className="relative w-full">{children}</Card>
       </main>
     </section>
   );

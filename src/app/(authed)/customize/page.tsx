@@ -2,6 +2,13 @@ import { getLinks } from "@/actions/link";
 import { validateRequest } from "@/lib/auth";
 import LinkForm from "./_components/LinkForm";
 import { redirect } from "next/navigation";
+import {
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default async function CustomizePage() {
   const { user } = await validateRequest();
@@ -12,16 +19,17 @@ export default async function CustomizePage() {
 
   return (
     <>
-      <header className="">
-        <h1 className="heading-m">Customize your links</h1>
-        <p className="body-m">
+      <CardHeader>
+        <CardTitle className="heading-m">Customize your link</CardTitle>
+        <CardDescription className="body-m">
           Add/edit/remove links below and then share all your profiles with the
           world!
-        </p>
+        </CardDescription>
         {links.error && <span className="text-xs text-red">{links.error}</span>}
-      </header>
-
-      <LinkForm links={links?.data} userId={user.id} />
+      </CardHeader>
+      <CardContent className="h-full">
+        <LinkForm links={links?.data} userId={user.id} />
+      </CardContent>
     </>
   );
 }

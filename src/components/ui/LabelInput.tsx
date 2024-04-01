@@ -44,7 +44,7 @@ export default function LabelInput({
           })}
         >
           <FormLabel className="body-s">{label}</FormLabel>
-          <FormControl className={cn("peer", { "md:w-1/2": halfOnTablet })}>
+          <FormControl className={cn("peer", { "md:w-[60%]": halfOnTablet })}>
             <div className="group relative aria-invalid:border-red ">
               <Input
                 icon={icon}
