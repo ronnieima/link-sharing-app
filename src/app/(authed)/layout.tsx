@@ -1,11 +1,22 @@
 import { cn } from "@/lib/utils";
 import AuthedNavbar from "./_components/AuthedNavbar";
+import Preview from "./customize/_components/Preview";
+import { getLinks } from "@/actions/link";
+import { validateRequest } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import CardContainer from "./_components/CardContainer";
 
 export default async function AuthedLayout({
   children,
 }: {
   children: React.ReactElement;
 }) {
+  const { user } = await validateRequest();
+  if (!user) {
+    return redirect("/login");
+  }
+
+  const links = await getLinks(user.id);
   return (
     <section>
       <AuthedNavbar />
@@ -16,7 +27,8 @@ export default async function AuthedLayout({
           "flex w-full  flex-row lg:gap-6 ",
         )}
       >
-        {children}
+        <Preview user={user} links={links.data} />
+        <CardContainer>{children}</CardContainer>
       </main>
     </section>
   );

@@ -1,4 +1,4 @@
-import PreviewItem from "@/app/(authed)/customize/PreviewItem";
+import PreviewItem from "@/app/(authed)/customize/_components/PreviewItem";
 import { LinkType } from "@/lib/db/schema";
 import { cn } from "@/lib/utils";
 import { User } from "lucia";

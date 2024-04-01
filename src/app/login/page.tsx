@@ -1,6 +1,6 @@
 import MaxWidthContainer from "@/components/MaxWidthContainer";
 import Image from "next/image";
-import LoginForm from "./LoginForm";
+import LoginForm from "./_components/LoginForm";
 import { redirect } from "next/navigation";
 import { validateRequest } from "@/lib/auth";
 
