@@ -12,8 +12,11 @@ import { loginUser } from "@/actions/auth";
 export default function DemoInfoPopover() {
   return (
     <Popover>
-      <PopoverTrigger>
-        <InfoIcon />
+      <PopoverTrigger asChild>
+        <Button variant={"ghost"} size={"icon"}>
+          <span className="sr-only">Demo account information</span>
+          <InfoIcon />
+        </Button>
       </PopoverTrigger>
       <PopoverContent>
         <section>

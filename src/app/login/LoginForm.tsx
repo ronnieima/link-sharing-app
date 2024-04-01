@@ -42,7 +42,7 @@ export default function LoginForm() {
         className="mx-auto space-y-10 md:w-[476px] md:rounded-lg md:bg-white md:p-10 md:shadow-sm"
       >
         <header className="space-y-2">
-          <div className="flex w-full items-center justify-between">
+          <div className="flex w-full items-center gap-2">
             <h1 className="heading-m">Login</h1>
             <DemoInfoPopover />
           </div>
