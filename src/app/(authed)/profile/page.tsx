@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import Preview from "../customize/Preview";
 import ProfileForm from "./ProfileForm";
 import UploadWidget from "./UploadWidget";
+import DeleteProfilePicture from "./DeleteProfilePicture";
 
 export default async function ProfilePage() {
   const { user } = await validateRequest();
@@ -31,9 +32,14 @@ export default async function ProfilePage() {
             </header>
             <div className="space-y-4 md:flex md:w-1/2 md:items-center md:gap-6">
               <UploadWidget user={user} />
-              <p className="body-s text-gray ">
-                Image must be below 1024x1024px. Use PNG or JPG format.
-              </p>
+              <div>
+                <p className="body-s text-gray ">
+                  Image must be below 1024x1024px. Use PNG or JPG format.
+                </p>
+                {user.profilePictureUrl && (
+                  <DeleteProfilePicture userId={user.id} />
+                )}
+              </div>
             </div>
           </section>
           <ProfileForm user={user} />

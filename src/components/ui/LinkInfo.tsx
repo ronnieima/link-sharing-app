@@ -16,10 +16,10 @@ export default function LinkInfo({ user, links }: Props) {
         <img
           src={user?.profilePictureUrl}
           alt="profile picture"
-          className=" size-[96px]   rounded-full border-4 border-purple"
+          className=" size-[96px]  rounded-full border-4 border-purple"
         />
       )}
-      <header className="flex flex-col items-center gap-2 bg-white pb-4">
+      <header className="flex w-full flex-col items-center gap-2 bg-white pb-4">
         {fullName && (
           <h2 className={cn("heading-s ", "w-full text-center")}>{fullName}</h2>
         )}
