@@ -16,6 +16,7 @@ export async function updateProfile(
       .update(users)
       .set({ firstName, lastName, email })
       .where(eq(users.id, userId));
+    revalidatePath("/profile");
     return { message: "Successfully updated user." };
   } catch (error) {
     return { error: `Error: ${error}` };
