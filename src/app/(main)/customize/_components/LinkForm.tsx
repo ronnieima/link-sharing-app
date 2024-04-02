@@ -89,6 +89,7 @@ export default function LinkForm({ links, userId }: Props) {
         >
           <Button
             variant={"outline"}
+            type="button"
             onClick={(e) => {
               e.preventDefault();
               if (fields.length < MAX_LINKS_AMOUNT) {

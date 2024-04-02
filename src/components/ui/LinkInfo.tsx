@@ -3,7 +3,7 @@ import { LinkType } from "@/lib/db/schema";
 import { cn } from "@/lib/utils";
 import { User } from "lucia";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 
 type Props = { user?: User; links?: LinkType[] };
 

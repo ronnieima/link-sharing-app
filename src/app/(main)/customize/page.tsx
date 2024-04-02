@@ -1,22 +1,13 @@
-import { getLinks } from "@/actions/link";
-import { validateRequest } from "@/lib/auth";
-import LinkForm from "./_components/LinkForm";
-import { redirect } from "next/navigation";
 import {
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import LinkFormLoader from "./_components/LinkFormLoader";
+import { Suspense } from "react";
 
-export default async function CustomizePage() {
-  const { user } = await validateRequest();
-  if (!user) {
-    return redirect("/login");
-  }
-  const links = await getLinks(user.id);
-
+export default function CustomizePage() {
   return (
     <>
       <CardHeader>
@@ -25,10 +16,11 @@ export default async function CustomizePage() {
           Add/edit/remove links below and then share all your profiles with the
           world!
         </CardDescription>
-        {links.error && <span className="text-xs text-red">{links.error}</span>}
       </CardHeader>
       <CardContent className="h-full">
-        <LinkForm links={links?.data} userId={user.id} />
+        <Suspense fallback={<h4 className="text-4xl">green fn</h4>}>
+          <LinkFormLoader />
+        </Suspense>
       </CardContent>
     </>
   );
