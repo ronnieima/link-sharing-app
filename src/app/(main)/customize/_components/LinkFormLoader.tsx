@@ -3,9 +3,11 @@ import { validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import React from "react";
 import LinkForm from "./LinkForm";
+import { getUser } from "@/lib/auth";
 
 export default async function LinkFormLoader() {
-  const { user } = await validateRequest();
+  const user = await getUser();
+
   if (!user) {
     return redirect("/login");
   }

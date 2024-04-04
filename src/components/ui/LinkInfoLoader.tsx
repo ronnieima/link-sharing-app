@@ -1,11 +1,11 @@
-import React from "react";
-import LinkInfo from "./LinkInfo";
+import { getUser } from "@/lib/auth";
 import { getLinks } from "@/actions/link";
-import { validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import LinkInfo from "./LinkInfo";
 
 export default async function LinkInfoLoader() {
-  const { user } = await validateRequest();
+  const user = await getUser();
+
   if (!user) {
     return redirect("/login");
   }

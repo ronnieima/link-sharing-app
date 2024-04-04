@@ -1,11 +1,12 @@
+import { getUser } from "@/lib/auth";
 import MaxWidthContainer from "@/components/MaxWidthContainer";
 import Image from "next/image";
-import RegisterForm from "./_components/RegisterForm";
-import { validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import RegisterForm from "./_components/RegisterForm";
 
 export default async function RegisterPage() {
-  const { user } = await validateRequest();
+  const user = await getUser();
+
   if (user) {
     return redirect("/");
   }

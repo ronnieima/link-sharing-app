@@ -1,11 +1,12 @@
+import { getUser } from "@/lib/auth";
 import MaxWidthContainer from "@/components/MaxWidthContainer";
 import Image from "next/image";
-import LoginForm from "./_components/LoginForm";
 import { redirect } from "next/navigation";
-import { validateRequest } from "@/lib/auth";
+import LoginForm from "./_components/LoginForm";
 
 export default async function LoginPage() {
-  const { user } = await validateRequest();
+  const user = await getUser();
+
   if (user) {
     return redirect("/");
   }

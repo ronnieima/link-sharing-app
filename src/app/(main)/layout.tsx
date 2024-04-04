@@ -1,17 +1,17 @@
+import { getUser } from "@/lib/auth";
+import { getLinks } from "@/actions/link";
+import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { redirect } from "next/navigation";
 import AuthedNavbar from "./_components/AuthedNavbar";
 import Preview from "./customize/_components/Preview";
-import { getLinks } from "@/actions/link";
-import { validateRequest } from "@/lib/auth";
-import { redirect } from "next/navigation";
-import { Card } from "@/components/ui/card";
 
 export default async function AuthedLayout({
   children,
 }: {
   children: React.ReactElement;
 }) {
-  const { user } = await validateRequest();
+  const user = await getUser();
   if (!user) {
     return redirect("/login");
   }
