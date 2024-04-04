@@ -23,12 +23,7 @@ export default function CustomizePage() {
           fallback={
             <div className="flex flex-col gap-6 py-8">
               <Skeleton className="h-10 w-full  rounded-lg" />
-              <Skeleton
-                height={248}
-                width={797}
-                count={3}
-                className="rounded-lg"
-              />
+              <Skeleton height={248} count={3} className="w-full rounded-lg" />
             </div>
           }
         >
