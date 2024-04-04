@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/card";
 import LinkFormLoader from "./_components/LinkFormLoader";
 import { Suspense } from "react";
+import Skeleton from "react-loading-skeleton";
 
 export default function CustomizePage() {
   return (
@@ -18,7 +19,19 @@ export default function CustomizePage() {
         </CardDescription>
       </CardHeader>
       <CardContent className="h-full">
-        <Suspense fallback={<h4 className="text-4xl">green fn</h4>}>
+        <Suspense
+          fallback={
+            <div className="flex flex-col gap-6 py-8">
+              <Skeleton className="h-10 w-full  rounded-lg" />
+              <Skeleton
+                height={248}
+                width={797}
+                count={3}
+                className="rounded-lg"
+              />
+            </div>
+          }
+        >
           <LinkFormLoader />
         </Suspense>
       </CardContent>
