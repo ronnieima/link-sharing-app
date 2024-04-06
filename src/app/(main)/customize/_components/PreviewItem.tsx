@@ -1,9 +1,9 @@
 "use client";
 import { LinkType } from "@/lib/db/schema";
 import { ArrowRight } from "lucide-react";
-import { platforms } from "./LinkForm";
 import { cloneElement } from "react";
 import Link from "next/link";
+import { platforms } from "@/components/ui/icons/icons";
 
 type Props = { link: LinkType };
 

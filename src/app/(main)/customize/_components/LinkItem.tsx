@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cloneElement, useEffect, useState } from "react";
-import { platforms } from "./LinkForm";
+import { platforms } from "@/components/ui/icons/icons";
 type Props = {
   link: FieldArrayWithId<
     {
@@ -84,7 +84,13 @@ export default function LinkItem({ link, index, remove }: Props) {
             <FormControl>
               <Select
                 onValueChange={(value) => {
-                  setValue(`links.${index}.url`, "");
+                  const newValue = platforms.find(
+                    (platformMeta) => platformMeta.value === value,
+                  );
+                  setValue(
+                    `links.${index}.url`,
+                    `https://www.${newValue?.link}/`,
+                  );
                   field.onChange(value);
                 }}
                 value={field.value}
