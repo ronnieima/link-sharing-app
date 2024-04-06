@@ -15,11 +15,11 @@ export default async function AuthedLayout({
         className={cn(
           "h-[calc(100svh-126px)]  p-4",
           "md:p-6 md:pt-0",
-          "flex w-full  flex-row lg:gap-6 ",
+          "flex w-full lg:gap-6 ",
         )}
       >
         <Preview />
-        <Card className="relative w-full">{children}</Card>
+        <Card className="relative">{children}</Card>
       </main>
     </section>
   );

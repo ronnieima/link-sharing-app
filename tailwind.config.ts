@@ -28,6 +28,9 @@ const config = {
       white: "#FFFFFF",
       red: "#FF3939",
     },
+    backgroundImage: {
+      phonePreview: "url('/images/illustration-phone-mockup.svg')",
+    },
     extend: {
       aria: {
         invalid: 'invalid="true"',
