@@ -58,8 +58,8 @@ export default function LinkForm({ links, userId }: Props) {
           id="linkForm"
           onSubmit={handleSubmit(onSubmit)}
           className={cn(
-            "h-full gap-8 rounded-lg py-8  text-center ",
-            "grid grid-rows-[40px_1fr] ",
+            "gap-8  rounded-lg py-8 text-center ",
+            "flex flex-col ",
           )}
         >
           <Button
@@ -78,7 +78,7 @@ export default function LinkForm({ links, userId }: Props) {
           >
             + Add new link
           </Button>
-          <ul className=" h-[calc(100%-100px)] space-y-6 overflow-y-auto">
+          <ul className="flex max-h-[33vh]   flex-col gap-6 overflow-y-auto">
             {fields.length === 0 ? (
               <EmptyLinks />
             ) : (
@@ -96,18 +96,18 @@ export default function LinkForm({ links, userId }: Props) {
               </>
             )}
           </ul>
+          <section className="flex w-full  gap-4 rounded-b-lg border-t border-border  px-6 py-4 md:flex-row md:justify-end lg:px-10 ">
+            <Button
+              form="linkForm"
+              type="submit"
+              disabled={!isDirty || isSubmitting}
+              className="m-0 p-0 md:w-[91px]"
+            >
+              Save
+            </Button>
+          </section>
         </form>
       </Form>
-      <section className="absolute bottom-0 right-0 flex w-full flex-col items-center gap-4 rounded-b-lg border-t border-border  px-6 py-4 md:flex-row md:justify-end lg:px-10 ">
-        <Button
-          form="linkForm"
-          type="submit"
-          disabled={!isDirty || isSubmitting}
-          className="m-0 p-0 md:w-[91px]"
-        >
-          Save
-        </Button>
-      </section>
     </>
   );
 }

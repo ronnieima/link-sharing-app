@@ -57,7 +57,7 @@ export default function LinkItem({ link, index, remove }: Props) {
   const regex = new RegExp(regexPattern);
 
   return (
-    <div className="flex w-full flex-col  gap-3 rounded-lg bg-lightGray p-5  text-center">
+    <div className="flex  flex-col  gap-3 rounded-lg bg-lightGray p-5  text-center">
       <div className="flex justify-between">
         <div className="flex items-center gap-2">
           <Grip size={16} />{" "}

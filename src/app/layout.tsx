@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" className=" bg-lightGray">
       <body
-        className={cn("min-h-svh overflow-y-hidden", instrumentSans.className)}
+        className={cn("min-h-svh lg:overflow-hidden", instrumentSans.className)}
       >
         <ToastProvider />
         {children}

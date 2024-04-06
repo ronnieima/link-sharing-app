@@ -6,11 +6,11 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 export default async function Preview() {
   return (
-    <section className="hidden lg:flex lg:min-w-[560px] lg:items-center lg:justify-center lg:rounded-lg lg:bg-white">
+    <section className="hidden lg:flex lg:min-w-[360px] lg:items-center lg:justify-center lg:rounded-lg lg:bg-white">
       <div
         className={cn(
           "h-full max-h-[631px] w-full max-w-[307px] gap-5 pt-16",
-          "bg-phonePreview bg-contain bg-no-repeat",
+          "bg-phonePreview bg-cover bg-no-repeat",
           "flex flex-col items-center",
         )}
       >

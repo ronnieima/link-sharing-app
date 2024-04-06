@@ -24,7 +24,7 @@ export default async function ProfilePage() {
           Add your details to create a personal touch to your profile.
         </CardDescription>
       </CardHeader>
-      <CardContent className="h-full space-y-4">
+      <CardContent className="space-y-4">
         <section className="flex flex-col gap-4 rounded-lg bg-lightGray p-5 md:flex-row md:items-center md:justify-between">
           <header>
             <h2 className="body-m text-gray">Profile Picture</h2>

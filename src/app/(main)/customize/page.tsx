@@ -18,7 +18,7 @@ export default function CustomizePage() {
           world!
         </CardDescription>
       </CardHeader>
-      <CardContent className="h-full">
+      <CardContent className="">
         <Suspense
           fallback={
             <div className="flex flex-col gap-6 py-8">
