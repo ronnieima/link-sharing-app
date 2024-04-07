@@ -5,10 +5,11 @@ import { cn } from "@/lib/utils";
 import { Bounce, toast } from "react-toastify";
 
 export default function ShareLinkButton({ userId }: { userId: string }) {
+  const rootUrl = process.env.VERCEL_URL || "http://localhost:3000";
   return (
     <Button
       onClick={() => {
-        navigator.clipboard.writeText(`http://localhost:3000/card/${userId}`);
+        navigator.clipboard.writeText(`${rootUrl}/card/${userId}`);
         toast("The link has been copied to your clipboard!", {
           position: "bottom-center",
           autoClose: 5000,
