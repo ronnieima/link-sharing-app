@@ -52,3 +52,11 @@ export async function deleteProfilePicture(userId: string) {
     return { error: `Error: ${error}` };
   }
 }
+
+export async function getUserById(userId: string) {
+  try {
+    return await db.query.users.findFirst({ where: eq(users.id, userId) });
+  } catch (error) {
+    console.log(error);
+  }
+}

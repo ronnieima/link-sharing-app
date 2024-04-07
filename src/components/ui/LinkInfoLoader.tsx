@@ -2,9 +2,10 @@ import { getUser } from "@/lib/auth";
 import { getLinks } from "@/actions/link";
 import { redirect } from "next/navigation";
 import LinkInfo from "./LinkInfo";
+import { getUserById } from "@/actions/profile";
 
-export default async function LinkInfoLoader() {
-  const user = await getUser();
+export default async function LinkInfoLoader({ userId }: { userId?: string }) {
+  const user = userId ? await getUserById(userId) : await getUser();
   if (!user) {
     return redirect("/login");
   }

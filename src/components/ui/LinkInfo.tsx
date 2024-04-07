@@ -7,7 +7,20 @@ import React, { Suspense } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-type Props = { user?: User; links?: LinkType[] };
+type Props = {
+  user?:
+    | {
+        id: string;
+        firstName: string | null;
+        lastName: string | null;
+        email: string;
+        emailVerified: boolean | null;
+        hashedPassword: string;
+        profilePictureUrl: string | null;
+      }
+    | User;
+  links?: LinkType[];
+};
 
 export default function LinkInfo({ user, links }: Props) {
   const fullName = `${user?.firstName} ${user?.lastName}`;
