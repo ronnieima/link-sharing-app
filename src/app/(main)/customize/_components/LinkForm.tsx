@@ -60,12 +60,9 @@ export default function LinkForm({ links, userId }: Props) {
         <form
           id="linkForm"
           onSubmit={handleSubmit(onSubmit)}
-          className={cn(
-            "h-full gap-8  rounded-lg pt-8 text-center",
-            "flex flex-col",
-          )}
+          className={cn("h-full gap-8  rounded-lg pt-8 text-center")}
         >
-          <div className=" flex h-[85%] flex-col gap-6 px-6 lg:px-10">
+          <div className=" flex max-h-[66%] flex-col gap-6 px-6 pb-6 lg:px-10">
             <Button
               variant={"outline"}
               type="button"
@@ -88,7 +85,7 @@ export default function LinkForm({ links, userId }: Props) {
             >
               + Add new link
             </Button>
-            <ul className="flex h-[95%]  flex-col gap-6 overflow-y-auto">
+            <ul className="flex flex-col gap-6 overflow-y-auto">
               {fields.length === 0 ? (
                 <EmptyLinks />
               ) : (
@@ -107,7 +104,7 @@ export default function LinkForm({ links, userId }: Props) {
               )}
             </ul>
           </div>
-          <section className="justify-self-end rounded-b-lg border-t border-border  py-4   ">
+          <section className="h-[25%] justify-self-end rounded-b-lg border-t border-border  py-4   ">
             <div
               className={cn(
                 "flex w-full px-6",

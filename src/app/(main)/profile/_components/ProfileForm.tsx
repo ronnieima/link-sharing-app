@@ -55,9 +55,9 @@ export default function ProfileForm({ user }: Props) {
         <form
           onSubmit={handleSubmit(onSubmit)}
           id="profileForm"
-          className="flex h-[70%] flex-col justify-between"
+          className="flex h-full flex-col justify-between"
         >
-          <div className="px-6 lg:px-10">
+          <div className="max-h-[70%] px-6 lg:px-10">
             <section className="space-y-3 rounded-lg bg-lightGray p-5">
               <LabelInput
                 label="First name*"

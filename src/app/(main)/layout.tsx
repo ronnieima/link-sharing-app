@@ -13,7 +13,7 @@ export default async function AuthedLayout({
       <AuthedNavbar />
       <main
         className={cn(
-          "h-[calc(100svh-126px)]  p-4",
+          "h-[calc(100svh-74px)] p-4  lg:h-[calc(100svh-126px)]",
           "md:p-6 md:pt-0",
           "flex w-full lg:gap-6 ",
         )}
