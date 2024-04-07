@@ -55,7 +55,7 @@ export default function ProfileForm({ user }: Props) {
         <form
           onSubmit={handleSubmit(onSubmit)}
           id="profileForm"
-          className="flex h-full flex-col justify-between"
+          className="flex flex-col justify-between gap-8"
         >
           <div className="max-h-[70%] px-6 lg:px-10">
             <section className="space-y-3 rounded-lg bg-lightGray p-5">
