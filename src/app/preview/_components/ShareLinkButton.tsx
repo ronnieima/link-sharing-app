@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { Bounce, toast } from "react-toastify";
 
 export default function ShareLinkButton({ userId }: { userId: string }) {
-  const rootUrl = process.env.VERCEL_URL || "http://localhost:3000";
+  const rootUrl = process.env.NEXT_PUBLIC_URL;
   return (
     <Button
       onClick={() => {
