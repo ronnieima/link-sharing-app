@@ -20,17 +20,20 @@ export default function LinkForm({ links, userId }: Props) {
       platform: link[1].platform,
       url: link[1].url,
     })) || [];
+
   const form = useForm({
     defaultValues: {
       links: defaultLinks,
     },
   });
+
   const {
     control,
     handleSubmit,
     formState: { isDirty, isSubmitting },
     reset,
   } = form;
+
   const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
     {
       control,
@@ -58,53 +61,69 @@ export default function LinkForm({ links, userId }: Props) {
           id="linkForm"
           onSubmit={handleSubmit(onSubmit)}
           className={cn(
-            "gap-8  rounded-lg py-8 text-center ",
-            "flex flex-col ",
+            "h-full gap-8  rounded-lg pt-8 text-center",
+            "flex flex-col",
           )}
         >
-          <Button
-            variant={"outline"}
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              if (fields.length < MAX_LINKS_AMOUNT) {
-                append({ platform: "github", url: "https://www.github.com/" });
-              } else if (fields.length >= MAX_LINKS_AMOUNT) {
-                toast(`Maximum number of links reached (${MAX_LINKS_AMOUNT})`, {
-                  type: "error",
-                });
-              }
-            }}
-          >
-            + Add new link
-          </Button>
-          <ul className="flex max-h-[33vh]   flex-col gap-6 overflow-y-auto">
-            {fields.length === 0 ? (
-              <EmptyLinks />
-            ) : (
-              <>
-                {fields.map((field, index) => {
-                  return (
-                    <LinkItem
-                      key={field.id}
-                      link={field}
-                      index={index}
-                      remove={remove}
-                    />
-                  );
-                })}
-              </>
-            )}
-          </ul>
-          <section className="flex w-full  gap-4 rounded-b-lg border-t border-border  px-6 py-4 md:flex-row md:justify-end lg:px-10 ">
+          <div className=" flex h-[85%] flex-col gap-6 px-6 lg:px-10">
             <Button
-              form="linkForm"
-              type="submit"
-              disabled={!isDirty || isSubmitting}
-              className="m-0 p-0 md:w-[91px]"
+              variant={"outline"}
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                if (fields.length < MAX_LINKS_AMOUNT) {
+                  append({
+                    platform: "github",
+                    url: "https://www.github.com/",
+                  });
+                } else if (fields.length >= MAX_LINKS_AMOUNT) {
+                  toast(
+                    `Maximum number of links reached (${MAX_LINKS_AMOUNT})`,
+                    {
+                      type: "error",
+                    },
+                  );
+                }
+              }}
             >
-              Save
+              + Add new link
             </Button>
+            <ul className="flex h-[95%]  flex-col gap-6 overflow-y-auto">
+              {fields.length === 0 ? (
+                <EmptyLinks />
+              ) : (
+                <>
+                  {fields.map((field, index) => {
+                    return (
+                      <LinkItem
+                        key={field.id}
+                        link={field}
+                        index={index}
+                        remove={remove}
+                      />
+                    );
+                  })}
+                </>
+              )}
+            </ul>
+          </div>
+          <section className="justify-self-end rounded-b-lg border-t border-border  py-4   ">
+            <div
+              className={cn(
+                "flex w-full px-6",
+                " md:flex-row md:justify-end",
+                " lg:px-10",
+              )}
+            >
+              <Button
+                form="linkForm"
+                type="submit"
+                disabled={!isDirty || isSubmitting}
+                className="m-0 p-0 md:w-[91px]"
+              >
+                Save
+              </Button>
+            </div>
           </section>
         </form>
       </Form>

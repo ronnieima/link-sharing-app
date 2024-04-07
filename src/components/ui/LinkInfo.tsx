@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 import { User } from "lucia";
 import Link from "next/link";
 import React, { Suspense } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 type Props = { user?: User; links?: LinkType[] };
 
@@ -19,13 +21,26 @@ export default function LinkInfo({ user, links }: Props) {
           className=" size-[96px] rounded-full border-4 border-purple"
         />
       ) : (
-        <section className=" size-[94px] h-40 flex-grow rounded-full opacity-0"></section>
+        <Skeleton
+          className="flex-grow rounded-full"
+          height={94}
+          width={94}
+          circle
+          enableAnimation={false}
+        />
       )}
       <header className="flex w-4/5  flex-col items-center   gap-1 pb-8">
-        {user?.firstName && user.lastName && (
+        {user?.firstName && user.lastName ? (
           <h2 className={cn("heading-s", "w-full bg-white text-center")}>
             {fullName}
           </h2>
+        ) : (
+          <Skeleton
+            height={16}
+            width={200}
+            borderRadius={8}
+            enableAnimation={false}
+          />
         )}
         {user?.email && (
           <Link

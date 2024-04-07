@@ -19,7 +19,7 @@ export default async function AuthedLayout({
         )}
       >
         <Preview />
-        <Card className="relative">{children}</Card>
+        <Card className="relative h-full">{children}</Card>
       </main>
     </section>
   );
