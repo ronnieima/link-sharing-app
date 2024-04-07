@@ -54,7 +54,6 @@ export default function ProfileForm({ user }: Props) {
       <Form {...form}>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          id="profileForm"
           className="flex flex-col justify-between gap-8"
         >
           <div className="max-h-[70%] px-6 lg:px-10">
@@ -92,7 +91,6 @@ export default function ProfileForm({ user }: Props) {
             >
               <LogoutButton />
               <Button
-                form="profileForm"
                 type="submit"
                 disabled={!isDirty || isSubmitting}
                 className="m-0 p-0 md:w-[91px]"

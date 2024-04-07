@@ -58,7 +58,6 @@ export default function LinkForm({ links, userId }: Props) {
     <>
       <Form {...form}>
         <form
-          id="linkForm"
           onSubmit={handleSubmit(onSubmit)}
           className={cn("h-full gap-8  rounded-lg pt-8 text-center")}
         >
@@ -113,7 +112,6 @@ export default function LinkForm({ links, userId }: Props) {
               )}
             >
               <Button
-                form="linkForm"
                 type="submit"
                 disabled={!isDirty || isSubmitting}
                 className="m-0 p-0 md:w-[91px]"
