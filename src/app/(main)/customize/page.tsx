@@ -12,7 +12,7 @@ export default function CustomizePage() {
   return (
     <>
       <CardHeader>
-        <CardTitle>Customize your link</CardTitle>
+        <CardTitle>Customize your links</CardTitle>
         <CardDescription>
           Add/edit/remove links below and then share all your profiles with the
           world!
