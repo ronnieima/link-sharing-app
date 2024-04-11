@@ -104,19 +104,19 @@ This full-stack web application is a challenge from <a href="https://www.fronten
 
 ### User Authentication with Demo Account
 
-![Auth](image-5.png)
+![Auth](/public/github/auth.png)
 
 ### Link Builder
 
-![Customize links](image-2.png)
+![Customize links](/public/github/customize.png)
 
 ### User Profile View
 
-![Profile](image-3.png)
+![Profile](/public/github/profile.png)
 
 ### Preview
 
-![Preview](image-4.png)
+![Preview](/public/github/preview.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
